@@ -1,0 +1,1 @@
+<h1>Beneficiary Dashboard</h1>
