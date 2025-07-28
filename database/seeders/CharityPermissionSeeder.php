@@ -98,6 +98,43 @@ class CharityPermissionSeeder extends Seeder
                 'module' => 'requests',
                 'action' => 'reject'
             ],
+
+            // Beneficiary permissions
+            [
+                'name' => 'charity.beneficiaries.view',
+                'display_name' => 'عرض المستفيدين',
+                'description' => 'إمكانية عرض قائمة المستفيدين',
+                'module' => 'beneficiaries',
+                'action' => 'view'
+            ],
+            [
+                'name' => 'charity.beneficiaries.create',
+                'display_name' => 'إضافة مستفيدين',
+                'description' => 'إمكانية إضافة مستفيدين جدد',
+                'module' => 'beneficiaries',
+                'action' => 'create'
+            ],
+            [
+                'name' => 'charity.beneficiaries.edit',
+                'display_name' => 'تعديل المستفيدين',
+                'description' => 'إمكانية تعديل بيانات المستفيدين',
+                'module' => 'beneficiaries',
+                'action' => 'edit'
+            ],
+            [
+                'name' => 'charity.beneficiaries.delete',
+                'display_name' => 'حذف المستفيدين',
+                'description' => 'إمكانية حذف المستفيدين',
+                'module' => 'beneficiaries',
+                'action' => 'delete'
+            ],
+            [
+                'name' => 'charity.beneficiaries.manage',
+                'display_name' => 'إدارة المستفيدين',
+                'description' => 'إمكانية إدارة جميع جوانب المستفيدين',
+                'module' => 'beneficiaries',
+                'action' => 'manage'
+            ],
             [
                 'name' => 'charity.requests.manage',
                 'display_name' => 'إدارة الطلبات',

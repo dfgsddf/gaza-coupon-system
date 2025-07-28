@@ -14,16 +14,6 @@
         @guest
         <li><a href="{{ route('login.form') }}" class="btn btn-primary ms-2">Login</a></li>
         @endguest
-        @if(app()->environment('local', 'development'))
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">Force Login</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="/force-login">Admin</a></li>
-                    <li><a class="dropdown-item" href="/force-login-store">Store</a></li>
-                    <li><a class="dropdown-item" href="/force-login-beneficiary">Beneficiary</a></li>
-                    <li><a class="dropdown-item" href="/force-login-charity">Charity</a></li>
-                </ul>
-            </li>
-        @endif
+
     </ul>
 </nav>

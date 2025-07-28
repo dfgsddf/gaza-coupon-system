@@ -227,6 +227,11 @@
                                                             title="عرض التبرعات">
                                                         <i class="fa-solid fa-dollar-sign"></i>
                                                     </button>
+                                                    <a href="{{ route('charity.campaigns.beneficiaries.index', $campaign->id) }}" 
+                                                       class="btn btn-sm btn-outline-warning"
+                                                       title="إدارة المستفيدين">
+                                                        <i class="fa-solid fa-users"></i>
+                                                    </a>
                                                 </div>
                                                 <div class="btn-group" role="group">
                                                     <button type="button" class="btn btn-sm btn-outline-success" 

@@ -261,6 +261,37 @@ Route::middleware(['auth', \App\Http\Middleware\CharityMiddleware::class])->pref
         ->name('charity.dashboard.storeCampaign')
         ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.create');
 
+    // Campaign Beneficiaries Routes
+    Route::prefix('campaigns/{campaignId}/beneficiaries')->name('charity.campaigns.beneficiaries.')->group(function() {
+        Route::get('/', [\App\Http\Controllers\Charity\CampaignBeneficiaryController::class, 'index'])
+            ->name('index')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.view');
+        
+        Route::get('/create', [\App\Http\Controllers\Charity\CampaignBeneficiaryController::class, 'create'])
+            ->name('create')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.create');
+        
+        Route::post('/', [\App\Http\Controllers\Charity\CampaignBeneficiaryController::class, 'store'])
+            ->name('store')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.create');
+        
+        Route::get('/{beneficiaryId}', [\App\Http\Controllers\Charity\CampaignBeneficiaryController::class, 'show'])
+            ->name('show')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.view');
+        
+        Route::patch('/{beneficiaryId}/status', [\App\Http\Controllers\Charity\CampaignBeneficiaryController::class, 'updateStatus'])
+            ->name('update-status')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.edit');
+        
+        Route::delete('/{beneficiaryId}', [\App\Http\Controllers\Charity\CampaignBeneficiaryController::class, 'destroy'])
+            ->name('destroy')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.delete');
+        
+        Route::get('/search', [\App\Http\Controllers\Charity\CampaignBeneficiaryController::class, 'search'])
+            ->name('search')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.view');
+    });
+
     // Request management routes
     Route::get('/requests', fn () => view('charity.requests'))
         ->name('charity.requests')
@@ -296,6 +327,45 @@ Route::middleware(['auth', \App\Http\Middleware\CharityMiddleware::class])->pref
     Route::get('/coupons', [\App\Http\Controllers\CharityDashboardController::class, 'coupons'])->name('charity.coupons')->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.coupons.view');
     Route::get('/coupons/create', [\App\Http\Controllers\CharityDashboardController::class, 'createCoupon'])->name('charity.coupons.create')->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.coupons.create');
     Route::post('/coupons', [\App\Http\Controllers\CharityDashboardController::class, 'storeCoupon'])->name('charity.coupons.store')->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.coupons.create');
+
+    // Beneficiary Management Routes
+    Route::prefix('beneficiaries')->name('charity.beneficiaries.')->group(function() {
+        Route::get('/', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'index'])
+            ->name('index')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.view');
+        
+        Route::get('/create', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'create'])
+            ->name('create')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.create');
+        
+        Route::post('/', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'store'])
+            ->name('store')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.create');
+        
+        Route::get('/{id}', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'show'])
+            ->name('show')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.view');
+        
+        Route::get('/{id}/edit', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'edit'])
+            ->name('edit')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.edit');
+        
+        Route::put('/{id}', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'update'])
+            ->name('update')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.edit');
+        
+        Route::delete('/{id}', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'destroy'])
+            ->name('destroy')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.delete');
+        
+        Route::get('/search', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'search'])
+            ->name('search')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.view');
+        
+        Route::get('/stats', [\App\Http\Controllers\Charity\BeneficiaryManagementController::class, 'stats'])
+            ->name('stats')
+            ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.beneficiaries.view');
+    });
 });
 
 /*
@@ -326,78 +396,8 @@ Route::redirect('/store', '/store/dashboard');
 | Development/Testing Routes (Remove in Production)
 |--------------------------------------------------------------------------
 */
-// Database connection test route
-Route::get('/test-db', function () {
-    try {
-        $userCount = \App\Models\User::count();
-        $campaignCount = \App\Models\Campaign::count();
-        $couponCount = \App\Models\Coupon::count();
-        $transactionCount = \App\Models\Transaction::count();
-        
-        return response()->json([
-            'success' => true,
-            'message' => 'Database connection successful!',
-            'data' => [
-                'users' => $userCount,
-                'campaigns' => $campaignCount,
-                'coupons' => $couponCount,
-                'transactions' => $transactionCount
-            ]
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Database connection failed: ' . $e->getMessage()
-        ], 500);
-    }
-});
-if (app()->environment('local', 'development')) {
-    Route::get('/force-login', function () {
-        $user = \App\Models\User::where('email', 'admin@example.com')->first();
-        Auth::login($user);
-        return redirect('/admin/dashboard');
-    });
 
-    Route::get('/force-login-beneficiary', function () {
-        $user = \App\Models\User::where('email', 'beneficiary@example.com')->first();
-        Auth::login($user);
-        return redirect('/beneficiary/dashboard');
-    })->name('force.login.beneficiary');
 
-    Route::get('/force-login-store', function () {
-        $user = \App\Models\User::where('email', 'store@example.com')->first();
-        Auth::login($user);
-        return redirect('/store/dashboard');
-    })->name('force.login.store');
-
-    Route::get('/force-login-charity', function () {
-        $user = \App\Models\User::where('email', 'charity@example.com')->first();
-        Auth::login($user);
-        return redirect('/charity/dashboard');
-    })->name('force.login.charity');
-
-    Route::get('/test-store-middleware', function () {
-        return 'Store middleware works!';
-    })->middleware(['auth', \App\Http\Middleware\StoreMiddleware::class]);
-
-    // Test route without middleware to isolate the issue
-    Route::get('/test-store-controller', function () {
-        return 'StoreDashboardController test: ' . StoreDashboardController::class;
-    });
-
-    // Test routes for other middlewares
-    Route::get('/test-charity-middleware', function () {
-        return 'Charity middleware works!';
-    })->middleware(['auth', \App\Http\Middleware\CharityMiddleware::class]);
-
-    Route::get('/test-beneficiary-middleware', function () {
-        return 'Beneficiary middleware works!';
-    })->middleware(['auth', \App\Http\Middleware\BeneficiaryMiddleware::class]);
-
-    Route::get('/test-admin-middleware', function () {
-        return 'Admin middleware works!';
-    })->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class]);
-}
 
 
 

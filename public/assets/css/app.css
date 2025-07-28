@@ -88,8 +88,6 @@ main {
 
 .text-nowrap {
     white-space: nowrap !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
 }
 
 /* ===== NAVBAR STYLES ===== */
@@ -112,8 +110,6 @@ main {
     align-items: center !important;
     gap: 0.5rem;
     white-space: nowrap !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
     min-width: auto !important;
     flex-shrink: 0 !important;
     text-decoration: none !important;
@@ -128,8 +124,6 @@ main {
 .navbar-brand span {
     display: inline-block !important;
     white-space: nowrap !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
     font-size: inherit !important;
     font-weight: inherit !important;
     color: inherit !important;

@@ -1,0 +1,84 @@
+/* Fixed CSS for Gaza Coupon System */
+
+/* Fix text overflow issues */
+.lead {
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+}
+
+/* Fix navbar brand text */
+.navbar-brand {
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: nowrap !important;
+}
+
+.navbar-brand span {
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: nowrap !important;
+}
+
+/* Fix hero section text */
+.hero-section .lead {
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+    max-width: 100% !important;
+}
+
+/* Fix card text */
+.card-text {
+    text-overflow: clip !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+}
+
+/* Fix all text elements */
+p, h1, h2, h3, h4, h5, h6, span, div {
+    text-overflow: clip !important;
+    overflow: visible !important;
+}
+
+/* Ensure proper text display */
+.text-center {
+    text-align: center !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+/* Fix container issues */
+.container {
+    overflow: visible !important;
+}
+
+.row {
+    overflow: visible !important;
+}
+
+.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, 
+.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    overflow: visible !important;
+}
+
+/* Fix loading overlay */
+#loading-overlay {
+    display: none !important;
+}
+
+#loading-overlay.show {
+    display: flex !important;
+} 

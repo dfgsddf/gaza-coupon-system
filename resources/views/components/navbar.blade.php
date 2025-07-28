@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url('/') }}">
-            <i class="fa-solid fa-ticket-alt me-2"></i>
-            <span class="text-nowrap">نظام قسائم غزة</span>
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <i class="fa-solid fa-ticket-alt"></i>
+            <span>نظام قسائم غزة</span>
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,19 +13,19 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <a href="{{ url('/') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
-                        <i class="fa-solid fa-home me-1"></i>
+                        <i class="fa-solid fa-home"></i>
                         <span>الرئيسية</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/contact') }}" class="nav-link {{ request()->is('contact*') ? 'active' : '' }}">
-                        <i class="fa-solid fa-envelope me-1"></i>
+                        <i class="fa-solid fa-envelope"></i>
                         <span>اتصل بنا</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/help') }}" class="nav-link {{ request()->is('help*') ? 'active' : '' }}">
-                        <i class="fa-solid fa-question-circle me-1"></i>
+                        <i class="fa-solid fa-question-circle"></i>
                         <span>المساعدة والدعم</span>
                     </a>
                 </li>
@@ -35,7 +35,7 @@
                 @guest
                     <li class="nav-item dropdown me-2">
                         <a class="nav-link dropdown-toggle btn btn-outline-light rounded px-3" href="#" id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-user-plus me-1"></i>
+                            <i class="fa-solid fa-user-plus"></i>
                             <span>تسجيل جديد</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="registerDropdown">
@@ -48,9 +48,29 @@
                             </a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle btn btn-outline-info rounded px-3" href="#" id="testAccountsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-flask"></i>
+                            <span>حسابات تجريبية</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="testAccountsDropdown">
+                            <li><a class="dropdown-item" href="{{ route('login.form') }}?email=admin@example.com&password=password">
+                                <i class="fa-solid fa-user-shield me-2 text-primary"></i>مشرف
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ route('login.form') }}?email=beneficiary@example.com&password=password">
+                                <i class="fa-solid fa-users me-2 text-success"></i>مستفيد
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ route('login.form') }}?email=store@example.com&password=password">
+                                <i class="fa-solid fa-store me-2 text-info"></i>متجر
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ route('login.form') }}?email=charity@example.com&password=password">
+                                <i class="fa-solid fa-building me-2 text-warning"></i>جمعية خيرية
+                            </a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route('login.form') }}" class="nav-link btn btn-light text-primary rounded px-3">
-                            <i class="fa-solid fa-sign-in-alt me-1"></i>
+                            <i class="fa-solid fa-sign-in-alt"></i>
                             <span>تسجيل الدخول</span>
                         </a>
                     </li>
@@ -95,25 +115,6 @@
                         </ul>
                     </li>
                 @endguest
-                
-                @if(app()->environment('local', 'development'))
-                    <li class="nav-item dropdown">
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="forceLoginDropdown">
-                            <li><a class="dropdown-item" href="/force-login">
-                                <i class="fa-solid fa-user-shield me-2"></i>مشرف
-                            </a></li>
-                            <li><a class="dropdown-item" href="/force-login-store">
-                                <i class="fa-solid fa-store me-2"></i>متجر
-                            </a></li>
-                            <li><a class="dropdown-item" href="/force-login-beneficiary">
-                                <i class="fa-solid fa-users me-2"></i>مستفيد
-                            </a></li>
-                            <li><a class="dropdown-item" href="/force-login-charity">
-                                <i class="fa-solid fa-building me-2"></i>جمعية خيرية
-                            </a></li>
-                        </ul>
-                    </li>
-                @endif
             </ul>
         </div>
     </div>

@@ -28,11 +28,26 @@
 
             <!-- Main Content -->
             <div class="col-lg-10 p-4">
+                <!-- Welcome Message for New Beneficiaries -->
+                @if(isset($welcomeMessage) && $welcomeMessage)
+                    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+                        <i class="fa-solid fa-check-circle me-2"></i>
+                        {{ $welcomeMessage }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
+
                 <!-- Topbar -->
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <h4>Beneficiary Dashboard</h4>
                         <p class="text-muted mb-0">Welcome back, {{ Auth::user()->name }}!</p>
+                        @if(Auth::user()->beneficiaryProfile && Auth::user()->beneficiaryProfile->verification_status === 'verified')
+                            <small class="text-success">
+                                <i class="fa-solid fa-check-circle me-1"></i>
+                                حسابك مُتحقق منه من الجمعية الخيرية
+                            </small>
+                        @endif
                     </div>
                     <a href="{{ route('requests.create') }}" class="btn btn-primary">
                         <i class="fa-solid fa-plus"></i> New Request

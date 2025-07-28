@@ -18,7 +18,18 @@ class BeneficiaryDashboardController extends Controller
         $requests = $user->requests()->latest()->get();
         $coupons = $user->coupons()->latest()->take(4)->get();
 
-        return view('beneficiary.dashboard', compact('requests', 'coupons'));
+        // التحقق من وجود رسالة ترحيب للمستفيدين الجدد
+        $welcomeMessage = null;
+        if ($user->beneficiaryProfile && $user->beneficiaryProfile->verification_status === 'verified') {
+            // التحقق من أن المستفيد تم إضافته مؤخراً (خلال آخر 24 ساعة)
+            $recentlyAdded = $user->beneficiaryProfile->created_at->isAfter(now()->subDay());
+            if ($recentlyAdded && !session('welcome_shown')) {
+                $welcomeMessage = 'مرحباً بك في نظام كوبونات غزة! تم إضافة حسابك بنجاح من الجمعية الخيرية. يمكنك الآن الاستفادة من الخدمات المتاحة.';
+                session(['welcome_shown' => true]);
+            }
+        }
+
+        return view('beneficiary.dashboard', compact('requests', 'coupons', 'welcomeMessage'));
     }
 
     public function settings()

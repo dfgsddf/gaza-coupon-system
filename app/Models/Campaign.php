@@ -58,6 +58,30 @@ class Campaign extends Model
     }
 
     /**
+     * Get the beneficiaries for the campaign.
+     */
+    public function beneficiaries(): HasMany
+    {
+        return $this->hasMany(CampaignBeneficiary::class);
+    }
+
+    /**
+     * Get the approved beneficiaries for the campaign.
+     */
+    public function approvedBeneficiaries(): HasMany
+    {
+        return $this->hasMany(CampaignBeneficiary::class)->where('status', 'approved');
+    }
+
+    /**
+     * Get the pending beneficiaries for the campaign.
+     */
+    public function pendingBeneficiaries(): HasMany
+    {
+        return $this->hasMany(CampaignBeneficiary::class)->where('status', 'pending');
+    }
+
+    /**
      * Check if the campaign is active.
      */
     public function isActive(): bool

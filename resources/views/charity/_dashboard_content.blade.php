@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12">
-            <h2 class="text-white mb-3">Charity Dashboard</h2>
-            <p class="text-light">Welcome back, {{ Auth::user()->name }}! (Charity)</p>
+            <h2 class="text-dark mb-3">Charity Dashboard</h2>
+            <p class="text-muted">Welcome back, {{ Auth::user()->name }}! (Charity)</p>
         </div>
     </div>
 
@@ -49,29 +49,34 @@
     <!-- Quick Actions -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="card bg-dark text-white">
-                <div class="card-header">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
                     <h5 class="mb-0">Quick Actions</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3 mb-2">
-                            <a href="{{ route('charity.campaigns') }}" class="btn btn-outline-primary w-100">
+                        <div class="col-md-2 mb-2">
+                            <a href="{{ route('charity.campaigns') }}" class="btn btn-primary w-100">
                                 <i class="fa-solid fa-plus me-2"></i>Create Campaign
                             </a>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{{ route('charity.requests') }}" class="btn btn-outline-success w-100">
+                        <div class="col-md-2 mb-2">
+                            <a href="{{ route('charity.requests') }}" class="btn btn-success w-100">
                                 <i class="fa-solid fa-eye me-2"></i>View Requests
                             </a>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <a href="{{ route('charity.reports') }}" class="btn btn-outline-info w-100">
+                        <div class="col-md-2 mb-2">
+                            <a href="{{ route('charity.beneficiaries.index') }}" class="btn btn-warning w-100">
+                                <i class="fa-solid fa-users me-2"></i>Manage Beneficiaries
+                            </a>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <a href="{{ route('charity.reports') }}" class="btn btn-info w-100">
                                 <i class="fa-solid fa-chart-bar me-2"></i>Generate Report
                             </a>
                         </div>
-                        <div class="col-md-3 mb-2">
-                            <button class="btn btn-outline-secondary w-100" onclick="refreshAll()">
+                        <div class="col-md-2 mb-2">
+                            <button class="btn btn-secondary w-100" onclick="refreshAll()">
                                 <i class="fa-solid fa-sync-alt me-2"></i>Refresh All
                             </button>
                         </div>
@@ -85,10 +90,10 @@
     <div class="row">
         <!-- Recent Campaigns -->
         <div class="col-md-6 mb-4">
-            <div class="card bg-dark text-white">
-                <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card border-success">
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Recent Campaigns</h5>
-                    <button class="btn btn-sm btn-outline-light" onclick="refreshCampaigns()">Refresh</button>
+                    <button class="btn btn-sm btn-light" onclick="refreshCampaigns()">Refresh</button>
                 </div>
                 <div class="card-body">
                     <div id="recent-campaigns">
@@ -96,7 +101,7 @@
                             @foreach($recentCampaigns as $campaign)
                                 <div class="d-flex justify-content-between align-items-center mb-2 p-2 border-bottom">
                                     <div>
-                                        <strong>{{ $campaign->title }}</strong>
+                                        <strong class="text-dark">{{ $campaign->title }}</strong>
                                         <br>
                                         <small class="text-muted">Goal: ${{ number_format($campaign->goal, 2) }}</small>
                                     </div>
@@ -115,10 +120,10 @@
 
         <!-- Recent Donations -->
         <div class="col-md-6 mb-4">
-            <div class="card bg-dark text-white">
-                <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Recent Donations</h5>
-                    <button class="btn btn-sm btn-outline-light" onclick="refreshDonations()">Refresh</button>
+                    <button class="btn btn-sm btn-light" onclick="refreshDonations()">Refresh</button>
                 </div>
                 <div class="card-body">
                     <div id="recent-donations">
@@ -126,7 +131,7 @@
                             @foreach($recentDonations as $donation)
                                 <div class="d-flex justify-content-between align-items-center mb-2 p-2 border-bottom">
                                     <div>
-                                        <strong>${{ number_format($donation->amount, 2) }}</strong>
+                                        <strong class="text-dark">${{ number_format($donation->amount, 2) }}</strong>
                                         <br>
                                         <small class="text-muted">{{ $donation->campaign->title ?? 'Unknown Campaign' }}</small>
                                     </div>
@@ -145,15 +150,15 @@
     <!-- Recent Requests -->
     <div class="row">
         <div class="col-12">
-            <div class="card bg-dark text-white">
-                <div class="card-header d-flex justify-content-between align-items-center">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Recent Requests</h5>
-                    <button class="btn btn-sm btn-outline-light" onclick="refreshRequests()">Refresh</button>
+                    <button class="btn btn-sm btn-dark" onclick="refreshRequests()">Refresh</button>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-dark table-striped">
-                            <thead>
+                        <table class="table table-striped">
+                            <thead class="table-warning">
                                 <tr>
                                     <th>Beneficiary</th>
                                     <th>Request Type</th>
@@ -167,15 +172,15 @@
                                 @if(isset($recentRequests) && $recentRequests->count() > 0)
                                     @foreach($recentRequests as $request)
                                         <tr>
-                                            <td>{{ $request->user->name ?? 'Unknown' }}</td>
-                                            <td>{{ $request->type ?? 'General' }}</td>
-                                            <td>${{ number_format($request->amount ?? 0, 2) }}</td>
+                                            <td class="text-dark">{{ $request->user->name ?? 'Unknown' }}</td>
+                                            <td class="text-dark">{{ $request->type ?? 'General' }}</td>
+                                            <td class="text-dark">${{ number_format($request->amount ?? 0, 2) }}</td>
                                             <td>
                                                 <span class="badge bg-{{ $request->status === 'approved' ? 'success' : ($request->status === 'rejected' ? 'danger' : 'warning') }}">
                                                     {{ ucfirst($request->status ?? 'pending') }}
                                                 </span>
                                             </td>
-                                            <td>{{ $request->created_at->format('M d, Y') }}</td>
+                                            <td class="text-dark">{{ $request->created_at->format('M d, Y') }}</td>
                                             <td>
                                                 <a href="{{ route('charity.requests') }}" class="btn btn-sm btn-outline-primary">View</a>
                                             </td>

@@ -83,7 +83,6 @@
           <button class="btn btn-confirm" id="redeem-btn" style="display:none;">Confirm Redemption</button>
         </div>
     
-        <!-- Transaction History (static for now) -->
         <div class="transaction-history">
           <h6 class="fw-bold mb-3">Transaction History</h6>
           <div class="table-responsive">

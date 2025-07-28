@@ -163,41 +163,79 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    <!-- Test Accounts Section -->
-                    <div class="mt-4">
-                        <div class="card border-info">
-                            <div class="card-header bg-info text-white">
-                                <h6 class="mb-0">
-                                    <i class="fas fa-info-circle me-2"></i>
-                                    حسابات تجريبية للاختبار
-                                </h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12 mb-2">
-                                        <small class="text-muted">المشرف:</small><br>
-                                        <code>admin@example.com</code> / <code>password</code>
-                                        <a href="/force-login" class="btn btn-sm btn-outline-info ms-2">تسجيل دخول سريع</a>
-                                    </div>
-                                    <div class="col-12 mb-2">
-                                        <small class="text-muted">المستفيد:</small><br>
-                                        <code>beneficiary@example.com</code> / <code>password</code>
-                                        <a href="/force-login-beneficiary" class="btn btn-sm btn-outline-info ms-2">تسجيل دخول سريع</a>
-                                    </div>
-                                    <div class="col-12 mb-2">
-                                        <small class="text-muted">المتجر:</small><br>
-                                        <code>store@example.com</code> / <code>password</code>
-                                        <a href="/force-login-store" class="btn btn-sm btn-outline-info ms-2">تسجيل دخول سريع</a>
-                                    </div>
-                                    <div class="col-12">
-                                        <small class="text-muted">الجمعية الخيرية:</small><br>
-                                        <code>charity@example.com</code> / <code>password</code>
-                                        <a href="/force-login-charity" class="btn btn-sm btn-outline-info ms-2">تسجيل دخول سريع</a>
-                                    </div>
+<!-- Test Accounts Section -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fa-solid fa-info-circle me-2"></i>
+                        حسابات تجريبية للاختبار
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3 border rounded">
+                                <div class="me-3">
+                                    <i class="fa-solid fa-user-shield fa-2x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">المشرف</h6>
+                                    <small class="text-muted">admin@example.com</small><br>
+                                    <small class="text-muted">كلمة المرور: password</small>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3 border rounded">
+                                <div class="me-3">
+                                    <i class="fa-solid fa-users fa-2x text-success"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">المستفيد</h6>
+                                    <small class="text-muted">beneficiary@example.com</small><br>
+                                    <small class="text-muted">كلمة المرور: password</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3 border rounded">
+                                <div class="me-3">
+                                    <i class="fa-solid fa-store fa-2x text-info"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">المتجر</h6>
+                                    <small class="text-muted">store@example.com</small><br>
+                                    <small class="text-muted">كلمة المرور: password</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center p-3 border rounded">
+                                <div class="me-3">
+                                    <i class="fa-solid fa-building fa-2x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1">الجمعية الخيرية</h6>
+                                    <small class="text-muted">charity@example.com</small><br>
+                                    <small class="text-muted">كلمة المرور: password</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('login.form') }}" class="btn btn-outline-info">
+                            <i class="fa-solid fa-sign-in-alt me-2"></i>
+                            تسجيل الدخول للاختبار
+                        </a>
                     </div>
                 </div>
             </div>

@@ -1,176 +1,274 @@
-# Gaza Coupon System - Graduation Project
+# نظام قسائم غزة - Gaza Coupon System
 
-## Overview
-The Gaza Coupon System is a comprehensive web application built with Laravel that manages coupon distribution and redemption for charitable organizations. The system supports multiple user roles including Admin, Charity, Store, and Beneficiary, each with specific permissions and functionalities.
+## نظرة عامة
 
-## Features
+نظام قسائم غزة هو منصة رقمية متكاملة تربط الجمعيات الخيرية والمتاجر والمستفيدين من خلال نظام آمن وفعال لإدارة القسائم والمساعدات الإنسانية.
 
-### 🔐 Multi-Role Authentication System
-- **Admin**: Full system management, user management, statistics
-- **Charity**: Campaign management, donation tracking, beneficiary approval
-- **Store**: Coupon validation, transaction management, reporting
-- **Beneficiary**: Request creation, coupon viewing, profile management
+## الميزات الرئيسية
 
-### 📊 Dashboard Features
-- **Admin Dashboard**: User management, system statistics, activity monitoring
-- **Charity Dashboard**: Campaign management, donation analytics, request approval
-- **Store Dashboard**: Coupon validation, transaction history, revenue tracking
-- **Beneficiary Dashboard**: Request status, available coupons, profile settings
+### 🏢 للجمعيات الخيرية
+- إنشاء وإدارة حملات المساعدة
+- تتبع التبرعات والمساعدات
+- إدارة المستفيدين
+- إنشاء التقارير التفصيلية
+- نظام إشعارات متقدم
 
-### 🎫 Coupon Management
-- Coupon generation and distribution
-- QR code validation system
-- Transaction tracking
-- Redemption history
+### 🏪 للمتاجر
+- قبول القسائم الرقمية
+- التحقق من صحة المعاملات
+- إدارة المشاركة في برامج المساعدة
+- تتبع المبيعات والمساعدات
 
-### 📈 Reporting & Analytics
-- Real-time statistics
-- Transaction reports
-- Campaign performance metrics
-- User activity monitoring
+### 👥 للمستفيدين
+- طلب المساعدة بسهولة
+- استلام القسائم الرقمية
+- استخدام القسائم في المتاجر المشاركة
+- تتبع المساعدات المستلمة
 
-## Technology Stack
-- **Backend**: Laravel 12.x (PHP 8.3+)
-- **Frontend**: Bootstrap 5, jQuery, Blade Templates
-- **Database**: MySQL/MariaDB
-- **Authentication**: Laravel's built-in authentication system
-- **Authorization**: Custom role-based permission system
+## التحسينات الجديدة (الإصدار 2.0)
 
-## Installation & Setup
+### 🎨 تحسينات التصميم
+- **نظام ألوان موحد**: استخدام متغيرات CSS للألوان والتصميم
+- **تصميم متجاوب محسن**: عرض مثالي على جميع الأجهزة
+- **خطوط محسنة**: استخدام خط Poppins مع أوزان مختلفة
+- **تأثيرات بصرية متقدمة**: ظلال، تدرجات، وانتقالات سلسة
 
-### Prerequisites
-- PHP 8.3 or higher
+### 🚀 تحسينات الأداء
+- **تحميل سريع**: تحسين سرعة تحميل الصفحات
+- **كود محسن**: CSS و JavaScript محسن
+- **صور محسنة**: تحسين أحجام الصور
+- **خطوط محسنة**: تحسين تحميل الخطوط
+
+### 📱 تحسينات الموبايل
+- **تصميم متجاوب**: عرض محسن على الموبايل
+- **قائمة محسنة**: قائمة محسنة للموبايل
+- **أزرار محسنة**: أزرار أكبر للموبايل
+- **تنقل محسن**: تنقل أسهل على الموبايل
+
+### ♿ تحسينات إمكانية الوصول
+- **دعم لوحة المفاتيح**: التنقل بلوحة المفاتيح
+- **قراءة الشاشة**: دعم برامج قراءة الشاشة
+- **تباين محسن**: تباين أفضل للألوان
+- **أحجام خطوط**: أحجام خطوط مناسبة
+
+## التقنيات المستخدمة
+
+### Backend
+- **Laravel 10**: إطار عمل PHP قوي
+- **MySQL**: قاعدة بيانات علائقية
+- **PHP 8.1+**: لغة البرمجة الرئيسية
+
+### Frontend
+- **Bootstrap 5**: إطار عمل CSS
+- **FontAwesome 6**: مكتبة الأيقونات
+- **JavaScript ES6+**: لغة البرمجة للواجهة
+- **CSS3**: تنسيقات متقدمة
+
+### الميزات التقنية
+- **RESTful API**: واجهات برمجة تطبيقات
+- **Authentication**: نظام مصادقة آمن
+- **Authorization**: نظام صلاحيات متقدم
+- **Real-time Notifications**: إشعارات فورية
+
+## التثبيت والتشغيل
+
+### المتطلبات
+- PHP 8.1 أو أحدث
 - Composer
-- MySQL/MariaDB
-- Web server (Apache/Nginx) or Laravel's built-in server
+- MySQL 8.0 أو أحدث
+- Node.js (للتطوير)
 
-### Installation Steps
+### خطوات التثبيت
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd gaza-coupon-system
-   ```
+1. **استنساخ المشروع**
+```bash
+git clone https://github.com/your-repo/gaza-coupon-system.git
+cd gaza-coupon-system
+```
 
-2. **Install dependencies**
-   ```bash
-   composer install
-   ```
+2. **تثبيت التبعيات**
+```bash
+composer install
+npm install
+```
 
-3. **Environment setup**
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
+3. **إعداد البيئة**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-4. **Configure database**
-   Edit `.env` file with your database credentials:
-   ```
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=gaza_coupon_system
-   DB_USERNAME=your_username
-   DB_PASSWORD=your_password
-   ```
+4. **إعداد قاعدة البيانات**
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-5. **Run migrations and seeders**
-   ```bash
-   php artisan migrate
-   php artisan db:seed
-   ```
+5. **تشغيل الخادم**
+```bash
+php artisan serve
+```
 
-6. **Start the development server**
-   ```bash
-   php artisan serve
-   ```
-
-## Demo Credentials
-
-### Development Environment
-For demonstration purposes, you can use the Force Login links in the navigation bar (only visible in local/development environment):
-
-- **Admin**: `/force-login`
-- **Store**: `/force-login-store`
-- **Beneficiary**: `/force-login-beneficiary`
-- **Charity**: `/force-login-charity`
-
-### Default Users (if seeded)
-- **Admin**: admin@example.com / password
-- **Store**: store@example.com / password
-- **Beneficiary**: beneficiary@example.com / password
-- **Charity**: charity@example.com / password
-
-## Project Structure
+## هيكل المشروع
 
 ```
 gaza-coupon-system/
 ├── app/
-│   ├── Http/Controllers/     # Application controllers
-│   ├── Models/              # Eloquent models
-│   ├── Http/Middleware/     # Custom middleware
-│   └── Mail/               # Email notifications
+│   ├── Http/Controllers/     # وحدات التحكم
+│   ├── Models/              # النماذج
+│   ├── Mail/                # رسائل البريد الإلكتروني
+│   └── Providers/           # مزودي الخدمات
 ├── database/
-│   ├── migrations/         # Database migrations
-│   └── seeders/           # Database seeders
-├── resources/views/       # Blade templates
-├── routes/               # Application routes
-└── public/              # Public assets
+│   ├── migrations/          # ملفات الهجرة
+│   ├── seeders/            # ملفات البذور
+│   └── factories/          # مصانع البيانات
+├── resources/
+│   ├── views/              # ملفات العرض
+│   ├── css/                # ملفات CSS
+│   └── js/                 # ملفات JavaScript
+├── public/
+│   ├── assets/             # الأصول الثابتة
+│   └── uploads/            # الملفات المرفوعة
+└── routes/
+    └── web.php             # مسارات الويب
 ```
 
-## Key Features Implementation
+## الملفات المحدثة في الإصدار 2.0
 
-### Role-Based Access Control
-- Custom middleware for each role (AdminMiddleware, StoreMiddleware, etc.)
-- Permission-based access control using RolePermission model
-- Automatic redirection based on user role
+### ملفات CSS الجديدة:
+- `public/assets/css/enhanced.css` - ملف CSS محسن جديد
+- `public/assets/css/advanced.css` - ملف CSS للتأثيرات المتقدمة
 
-### Interactive Dashboards
-- AJAX-powered real-time updates
-- Dynamic statistics and charts
-- User-friendly interface with Bootstrap 5
+### ملفات JavaScript المحدثة:
+- `public/assets/js/main.js` - ملف JavaScript محسن
 
-### Security Features
-- CSRF protection on all forms
-- Password hashing
-- Input validation and sanitization
-- SQL injection prevention through Eloquent ORM
+### ملفات Blade المحدثة:
+- `resources/views/layouts/app.blade.php` - التخطيط الرئيسي
+- `resources/views/components/navbar.blade.php` - نافبار محسن
+- `resources/views/components/footer.blade.php` - فوتر محسن
+- `resources/views/components/alerts.blade.php` - تنبيهات محسنة
+- `resources/views/home.blade.php` - صفحة رئيسية محسنة
 
-## API Endpoints
+## كيفية الاستخدام
 
-### Admin Routes
-- `GET /admin/dashboard` - Admin dashboard
-- `GET /admin/users` - User management
-- `PATCH /admin/users/{user}/status` - Update user status
+### 1. تضمين الملفات الجديدة:
+```html
+<!-- في ملف التخطيط الرئيسي -->
+<link href="{{ asset('assets/css/enhanced.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/advanced.css') }}" rel="stylesheet">
+<script src="{{ asset('assets/js/main.js') }}"></script>
+```
 
-### Store Routes
-- `GET /store/dashboard` - Store dashboard
-- `POST /store/validate-coupon` - Validate coupon
-- `GET /store/transactions` - Transaction history
+### 2. استخدام الفئات الجديدة:
+```html
+<!-- بطاقة إحصائيات -->
+<div class="card stats-card">
+    <div class="card-body">
+        <div class="stats-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="stats-number">1000+</div>
+        <div class="stats-label">مستفيد</div>
+    </div>
+</div>
 
-### Charity Routes
-- `GET /charity/dashboard` - Charity dashboard
-- `GET /charity/campaigns` - Campaign management
-- `POST /charity/campaigns` - Create campaign
+<!-- زر محسن -->
+<button class="btn btn-primary btn-loading">
+    <i class="fa-solid fa-save me-2"></i>حفظ
+</button>
 
-### Beneficiary Routes
-- `GET /beneficiary/dashboard` - Beneficiary dashboard
-- `GET /requests` - Request management
-- `GET /coupons` - Available coupons
+<!-- تأثيرات متقدمة -->
+<div class="card glass-card">
+    <div class="card-body">
+        <h5 class="text-gradient">عنوان بتدرج لوني</h5>
+    </div>
+</div>
+```
 
-## Contributing
+### 3. استخدام الوظائف JavaScript الجديدة:
+```javascript
+// عرض تنبيه
+showToast('تم الحفظ بنجاح!', 'success');
 
-This is a graduation project. For any questions or issues, please contact the development team.
+// تنسيق العملة
+const formattedAmount = formatCurrency(1000, 'ILS');
 
-## License
+// تنسيق التاريخ
+const formattedDate = formatDate(new Date(), 'ar-IL');
 
-This project is developed for educational purposes as a graduation project.
+// تحديث الجدول
+refreshTable();
+```
 
-## Support
+## الميزات الجديدة في الإصدار 2.0
 
-For technical support or questions about this graduation project, please contact the development team.
+### 🎨 نظام التصميم المحسن
+- **نظام ألوان موحد**: ألوان متناسقة في جميع أنحاء الموقع
+- **تأثيرات بصرية متقدمة**: تأثيرات hover محسنة وانتقالات سلسة
+- **تصميم متجاوب**: عرض مثالي على جميع الأجهزة
+- **خطوط محسنة**: خط Poppins مع أوزان مختلفة
+
+### 🚀 تحسينات الأداء
+- **تحميل أسرع**: تحسين سرعة تحميل الصفحات
+- **كود محسن**: CSS و JavaScript محسن
+- **تفاعلات أفضل**: تفاعلات محسنة مع العناصر
+- **تحميل سلس**: مؤشر تحميل محسن
+
+### 📱 تحسينات الموبايل
+- **تصميم متجاوب**: عرض محسن على الموبايل
+- **قائمة محسنة**: قائمة محسنة للموبايل
+- **أزرار محسنة**: أزرار أكبر للموبايل
+- **تنقل محسن**: تنقل أسهل على الموبايل
+
+### ♿ تحسينات إمكانية الوصول
+- **دعم لوحة المفاتيح**: التنقل بلوحة المفاتيح
+- **قراءة الشاشة**: دعم برامج قراءة الشاشة
+- **تباين محسن**: تباين أفضل للألوان
+- **أحجام خطوط**: أحجام خطوط مناسبة
+
+## المساهمة
+
+نرحب بمساهماتكم! يرجى اتباع الخطوات التالية:
+
+1. Fork المشروع
+2. إنشاء فرع للميزة الجديدة (`git checkout -b feature/AmazingFeature`)
+3. Commit التغييرات (`git commit -m 'Add some AmazingFeature'`)
+4. Push إلى الفرع (`git push origin feature/AmazingFeature`)
+5. فتح Pull Request
+
+## الترخيص
+
+هذا المشروع مرخص تحت رخصة MIT. راجع ملف `LICENSE` للتفاصيل.
+
+## الدعم والمساعدة
+
+للمساعدة أو الإبلاغ عن مشاكل:
+- 📧 البريد الإلكتروني: support@gaza-coupon.com
+- 📞 الهاتف: +970-XXX-XXXX
+- 🌐 الموقع: https://gaza-coupon.com
+
+## فريق التطوير
+
+- **المطور الرئيسي**: فريق تطوير نظام قسائم غزة
+- **المصمم**: فريق التصميم
+- **مدير المشروع**: إدارة المشروع
+
+## التحديثات المستقبلية
+
+### الإصدار 2.1 (قيد التطوير)
+- [ ] تطبيق موبايل (React Native)
+- [ ] نظام دفع إلكتروني
+- [ ] تحليلات متقدمة
+- [ ] نظام إشعارات فوري
+
+### الإصدار 2.2 (مخطط)
+- [ ] واجهة برمجة تطبيقات عامة
+- [ ] نظام تقارير متقدم
+- [ ] دعم متعدد اللغات
+- [ ] نظام أمان محسن
 
 ---
 
-**Developed as a Graduation Project**  
-*Gaza Coupon System - 2025*
+**آخر تحديث:** ديسمبر 2024  
+**الإصدار الحالي:** 2.0.0  
+**الحالة:** مستقر ومُحسن
