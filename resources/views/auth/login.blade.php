@@ -81,6 +81,42 @@
                             </a>
                         </div>
                     </form>
+                    
+                    <!-- Test Accounts Section -->
+                    <div class="mt-4">
+                        <div class="card border-info">
+                            <div class="card-header bg-info text-white text-center">
+                                <h6 class="mb-0">
+                                    <i class="fa-solid fa-flask me-2"></i>
+                                    حسابات تجريبية للاختبار
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-primary btn-sm w-100" onclick="fillForm('admin@example.com', 'password')">
+                                            <i class="fa-solid fa-user-shield me-1"></i>مشرف
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-success btn-sm w-100" onclick="fillForm('beneficiary@example.com', 'password')">
+                                            <i class="fa-solid fa-users me-1"></i>مستفيد
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-info btn-sm w-100" onclick="fillForm('store@example.com', 'password')">
+                                            <i class="fa-solid fa-store me-1"></i>متجر
+                                        </button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-warning btn-sm w-100" onclick="fillForm('charity@example.com', 'password')">
+                                            <i class="fa-solid fa-building me-1"></i>جمعية
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -235,4 +271,45 @@
         document.getElementById('email').focus();
     });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-fill form if email and password are provided in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email');
+    const password = urlParams.get('password');
+    
+    if (email && password) {
+        document.getElementById('email').value = email;
+        document.getElementById('password').value = password;
+        
+        // Show a notification
+        const notification = document.createElement('div');
+        notification.className = 'alert alert-info alert-dismissible fade show';
+        notification.innerHTML = `
+            <i class="fa-solid fa-info-circle me-2"></i>
+            تم ملء النموذج تلقائياً بالحساب التجريبي
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.querySelector('.card-body').insertBefore(notification, document.querySelector('.card-body').firstChild);
+    }
+});
+
+// Function to fill form with test account
+function fillForm(email, password) {
+    document.getElementById('email').value = email;
+    document.getElementById('password').value = password;
+    
+    // Show a notification
+    const notification = document.createElement('div');
+    notification.className = 'alert alert-success alert-dismissible fade show';
+    notification.innerHTML = `
+        <i class="fa-solid fa-check-circle me-2"></i>
+        تم ملء النموذج بالحساب التجريبي: ${email}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    document.querySelector('.card-body').insertBefore(notification, document.querySelector('.card-body').firstChild);
+}
+</script>
+
 @endsection

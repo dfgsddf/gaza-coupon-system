@@ -15,8 +15,19 @@ class StoreController extends Controller
 {
     public function index(Request $request)
     {
+        // إذا كان الطلب يريد JSON (API)
+        if ($request->wantsJson() || $request->is('*/api*')) {
+            return $this->getStoresApi($request);
+        }
+        
+        // عرض الصفحة
+        return view('admin.stores');
+    }
+    
+    private function getStoresApi(Request $request)
+    {
         try {
-            Log::info('StoreController@index called', ['user_id' => auth()->id()]);
+            Log::info('StoreController@getStoresApi called', ['user_id' => auth()->id()]);
             
             // استعلام محسن مع تحميل العلاقات المطلوبة
             $query = Store::query()
@@ -96,13 +107,36 @@ class StoreController extends Controller
                         'store_id' => $store->id ?? 'unknown',
                         'store_name' => $store->name ?? 'unknown'
                     ]);
-                    return null;
+                    // بدلاً من إرجاع null، نرجع بيانات المتجر الأساسية
+                    return [
+                        'id' => $store->id,
+                        'name' => $store->name,
+                        'store_code' => $store->store_code,
+                        'email' => $store->email,
+                        'phone' => $store->phone,
+                        'address' => $store->address,
+                        'status' => $store->status ?? 'active',
+                        'store_type' => $store->store_type,
+                        'description' => $store->description,
+                        'has_physical_location' => $store->has_physical_location,
+                        'accepts_online_orders' => $store->accepts_online_orders,
+                        'tax_number' => $store->tax_number,
+                        'commercial_register' => $store->commercial_register,
+                        'primary_user' => null,
+                        'users_count' => 0,
+                        'transactions_count' => 0,
+                        'coupons_count' => 0,
+                        'total_revenue' => 0,
+                        'active_coupons' => 0,
+                        'created_at' => $store->created_at,
+                        'updated_at' => $store->updated_at
+                    ];
                 }
-            })->filter();
+            });
             
             Log::info('Fetched stores data:', [
-                'count' => $stores->count(),
-                'sample_store' => $stores->first() ? $stores->first()->toArray() : null
+                'count' => count($stores),
+                'sample_store' => $stores->first() ? $stores->first() : null
             ]);
             
             return response()->json($stores);

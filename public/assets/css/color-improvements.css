@@ -1,0 +1,269 @@
+/* Color Improvements for Gaza Coupon System */
+
+/* Enhanced Navbar Colors */
+.navbar {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-nav .nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff !important;
+}
+
+/* Enhanced Sidebar Colors */
+.sidebar-fixed {
+    background: linear-gradient(180deg, #1d4ed8 0%, #2563eb 100%);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-fixed a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.sidebar-fixed a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.sidebar-fixed a.active-link {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+/* Enhanced Card Colors */
+.card {
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+    border-color: #60a5fa;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Enhanced Button Colors */
+.btn-primary {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border-color: #2563eb;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    border-color: #1d4ed8;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    border-color: #10b981;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #059669, #10b981);
+    border-color: #059669;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    border-color: #f59e0b;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #d97706, #f59e0b);
+    border-color: #d97706;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    border-color: #ef4444;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    border-color: #dc2626;
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+    border-color: #06b6d4;
+}
+
+.btn-info:hover {
+    background: linear-gradient(135deg, #0891b2, #06b6d4);
+    border-color: #0891b2;
+}
+
+/* Enhanced Stats Cards */
+.stats-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+}
+
+.stats-card:hover {
+    border-color: #60a5fa;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.stats-icon {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+
+/* Enhanced Table Colors */
+.table th {
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    color: #1e293b;
+}
+
+.table-hover tbody tr:hover {
+    background: rgba(37, 99, 235, 0.05);
+}
+
+/* Enhanced Form Colors */
+.form-control:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+}
+
+.form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+}
+
+/* Enhanced Alert Colors */
+.alert-success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border-right: 4px solid #10b981;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+    border-right: 4px solid #ef4444;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+    border-right: 4px solid #f59e0b;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #cffafe, #a5f3fc);
+    color: #164e63;
+    border-right: 4px solid #06b6d4;
+}
+
+/* Enhanced Badge Colors */
+.badge-primary {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.badge-success {
+    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+.badge-warning {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+}
+
+.badge-danger {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+.badge-info {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+}
+
+/* Enhanced Progress Bar */
+.progress-bar {
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+}
+
+/* Enhanced Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+/* Enhanced Dropdown Colors */
+.dropdown-menu {
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+}
+
+/* Enhanced Status Colors */
+.status-active {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    color: #ffffff;
+}
+
+.status-pending {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #92400e;
+}
+
+.status-suspended {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    color: #ffffff;
+}
+
+/* Enhanced Text Colors */
+.text-primary {
+    color: #2563eb !important;
+}
+
+.text-success {
+    color: #10b981 !important;
+}
+
+.text-warning {
+    color: #f59e0b !important;
+}
+
+.text-danger {
+    color: #ef4444 !important;
+}
+
+.text-info {
+    color: #06b6d4 !important;
+}
+
+/* Enhanced Background Colors */
+.bg-primary {
+    background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+}
+
+.bg-success {
+    background: linear-gradient(135deg, #10b981, #34d399) !important;
+}
+
+.bg-warning {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+}
+
+.bg-danger {
+    background: linear-gradient(135deg, #ef4444, #f87171) !important;
+}
+
+.bg-info {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee) !important;
+} 

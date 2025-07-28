@@ -113,7 +113,7 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
     
     // Admin Static Pages (Protected)
     Route::view('/organizations', 'admin.organizations')->name('admin.organizations');
-    Route::view('/stores', 'admin.stores')->name('admin.stores');
+    Route::get('/stores', [\App\Http\Controllers\Admin\StoreController::class, 'index'])->name('admin.stores');
 
     // Organization Management API
     Route::get('/organizations/api', [\App\Http\Controllers\Admin\OrganizationController::class, 'index'])->name('admin.organizations.api.index');
