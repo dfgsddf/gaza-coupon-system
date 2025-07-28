@@ -249,6 +249,14 @@ Route::middleware(['auth', \App\Http\Middleware\CharityMiddleware::class])->pref
         ->name('charity.campaigns.donations')
         ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.view');
     
+    Route::get('/campaigns/{id}', [\App\Http\Controllers\CharityDashboardController::class, 'showCampaign'])
+        ->name('charity.campaigns.show')
+        ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.view');
+    
+    Route::get('/campaigns/{id}/edit', [\App\Http\Controllers\CharityDashboardController::class, 'getCampaign'])
+        ->name('charity.campaigns.edit')
+        ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.view');
+    
     Route::post('/dashboard/campaign', [\App\Http\Controllers\CharityDashboardController::class, 'storeCampaign'])
         ->name('charity.dashboard.storeCampaign')
         ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.campaigns.create');

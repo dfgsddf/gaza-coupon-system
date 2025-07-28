@@ -56,33 +56,38 @@
                     </li>
                 @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-user me-1"></i>
-                            <span>{{ Auth::user()->name }}</span>
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="user-avatar me-2">
+                                <i class="fa-solid fa-user-circle fa-lg"></i>
+                            </div>
+                            <div class="user-info text-end">
+                                <small class="d-block opacity-75">مرحباً</small>
+                                <span class="fw-semibold">{{ Auth::user()->name }}</span>
+                            </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             @if(Auth::user()->role === 'admin')
                                 <li><a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                                    <i class="fa-solid fa-user-shield me-2"></i>لوحة المشرف
+                                    <i class="fa-solid fa-user-shield me-2 text-primary"></i>لوحة المشرف
                                 </a></li>
                             @elseif(Auth::user()->role === 'charity')
                                 <li><a class="dropdown-item" href="{{ route('charity.dashboard') }}">
-                                    <i class="fa-solid fa-building me-2"></i>لوحة الجمعية الخيرية
+                                    <i class="fa-solid fa-building me-2 text-success"></i>لوحة الجمعية الخيرية
                                 </a></li>
                             @elseif(Auth::user()->role === 'store')
                                 <li><a class="dropdown-item" href="{{ route('store.dashboard') }}">
-                                    <i class="fa-solid fa-store me-2"></i>لوحة المتجر
+                                    <i class="fa-solid fa-store me-2 text-info"></i>لوحة المتجر
                                 </a></li>
                             @elseif(Auth::user()->role === 'beneficiary')
                                 <li><a class="dropdown-item" href="{{ route('beneficiary.coupons.index') }}">
-                                    <i class="fa-solid fa-ticket-alt me-2"></i>كوبوناتي
+                                    <i class="fa-solid fa-ticket-alt me-2 text-warning"></i>كوبوناتي
                                 </a></li>
                             @endif
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">
+                                    <button type="submit" class="dropdown-item text-danger">
                                         <i class="fa-solid fa-sign-out-alt me-2"></i>تسجيل الخروج
                                     </button>
                                 </form>
@@ -120,6 +125,9 @@
     border-radius: 6px;
     margin: 0 0.25rem;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .navbar-nav .nav-link:hover {
@@ -138,11 +146,14 @@
     border-radius: 8px;
     padding: 0.5rem 0;
     margin-top: 0.5rem;
+    min-width: 200px;
 }
 
 .dropdown-item {
     padding: 0.7rem 1.5rem;
     transition: all 0.3s ease;
+    border-radius: 6px;
+    margin: 0.1rem 0.5rem;
 }
 
 .dropdown-item:hover {
@@ -161,8 +172,42 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+.user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+    line-height: 1.2;
+}
+
+.user-info small {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 /* RTL Support */
 .navbar-brand {
+    direction: rtl;
+}
+
+.dropdown-item {
+    direction: rtl;
+    text-align: right;
+}
+
+.dropdown-item i {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.user-info {
     direction: rtl;
 }
 
@@ -179,6 +224,40 @@
     .btn.nav-link {
         margin: 0.25rem 0;
         width: 100%;
+    }
+    
+    .user-info {
+        text-align: center;
+    }
+    
+    .dropdown-menu {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .dropdown-item {
+        text-align: center;
+        transform: none;
+    }
+    
+    .dropdown-item:hover {
+        transform: none;
+        background-color: #f8f9fa;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand span {
+        font-size: 0.9rem;
+    }
+    
+    .user-info {
+        display: none;
+    }
+    
+    .user-avatar {
+        width: 32px;
+        height: 32px;
     }
 }
 </style> 

@@ -312,6 +312,74 @@ class CharityDashboardController extends Controller
         ]);
     }
 
+    public function showCampaign($id)
+    {
+        // Check permission
+        if (!Auth::user()->hasPermission('charity.campaigns.view')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'ليس لديك صلاحية لعرض تفاصيل الحملة'
+            ], 403);
+        }
+
+        $campaign = Campaign::where('charity_id', Auth::id())->findOrFail($id);
+        $campaign->load(['donations.donor']);
+
+        return response()->json([
+            'success' => true,
+            'campaign' => [
+                'id' => $campaign->id,
+                'name' => $campaign->name,
+                'description' => $campaign->description,
+                'goal' => $campaign->goal,
+                'current_amount' => $campaign->current_amount,
+                'progress_percentage' => $campaign->progress_percentage,
+                'donors_count' => $campaign->donors_count,
+                'status' => $campaign->status,
+                'is_featured' => $campaign->is_featured,
+                'start_date' => $campaign->start_date,
+                'end_date' => $campaign->end_date,
+                'created_at' => $campaign->created_at->format('M d, Y H:i'),
+                'updated_at' => $campaign->updated_at->format('M d, Y H:i'),
+                'recent_donations' => $campaign->donations()->with('donor')->latest()->take(5)->get()->map(function($donation) {
+                    return [
+                        'amount' => $donation->amount,
+                        'donor_name' => $donation->donor ? $donation->donor->name : 'مجهول',
+                        'message' => $donation->message,
+                        'created_at' => $donation->created_at->format('M d, Y H:i'),
+                    ];
+                })
+            ]
+        ]);
+    }
+
+    public function getCampaign($id)
+    {
+        // Check permission
+        if (!Auth::user()->hasPermission('charity.campaigns.view')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'ليس لديك صلاحية لعرض الحملة'
+            ], 403);
+        }
+
+        $campaign = Campaign::where('charity_id', Auth::id())->findOrFail($id);
+
+        return response()->json([
+            'success' => true,
+            'campaign' => [
+                'id' => $campaign->id,
+                'name' => $campaign->name,
+                'description' => $campaign->description,
+                'goal' => $campaign->goal,
+                'status' => $campaign->status,
+                'is_featured' => $campaign->is_featured,
+                'start_date' => $campaign->start_date,
+                'end_date' => $campaign->end_date,
+            ]
+        ]);
+    }
+
     public function reports()
     {
         // Check permission
