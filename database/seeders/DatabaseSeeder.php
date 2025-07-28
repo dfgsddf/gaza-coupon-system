@@ -11,6 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // استدعاء Seeder للصلاحيات
+        $this->call(PermissionSeeder::class);
+
+        // استدعاء Seeder للصلاحيات الخاصة بالجمعيات الخيرية
+        $this->call(CharityPermissionSeeder::class);
+        
         // استدعاء Seeder الخاص بالمستخدمين
         $this->call(UserSeeder::class);
         
@@ -22,8 +28,5 @@ class DatabaseSeeder extends Seeder
         
         // استدعاء Seeder للحملات
         $this->call(CampaignSeeder::class);
-        
-        // استدعاء Seeder للصلاحيات
-        $this->call(CharityPermissionSeeder::class);
     }
 }

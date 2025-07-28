@@ -153,6 +153,16 @@
                             تسجيل الدخول
                         </a>
                     </div>
+                    
+                    <div class="text-center mt-3">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>مستفيد؟</strong> يمكنك استخدام 
+                            <a href="{{ route('beneficiary.register.form') }}" class="text-decoration-none fw-bold">
+                                صفحة التسجيل المبسطة للمستفيدين
+                            </a>
+                        </div>
+                    </div>
 
                     <!-- Test Accounts Section -->
                     <div class="mt-4">

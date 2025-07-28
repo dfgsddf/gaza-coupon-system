@@ -29,37 +29,37 @@
             <!-- Statistics Cards -->
             <div class="row mb-4">
                 <div class="col-md-3 mb-3">
-                    <div class="card bg-primary text-white">
+                    <div class="card bg-primary text-white" id="org-total-card">
                         <div class="card-body text-center">
                             <h5 class="card-title">Total Organizations</h5>
-                            <h3 class="mb-0" id="total-organizations">12</h3>
+                            <h3 class="mb-0" id="org-total">0</h3>
                             <small>Click to refresh</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card bg-success text-white">
+                    <div class="card bg-success text-white" id="org-active-card">
                         <div class="card-body text-center">
                             <h5 class="card-title">Active Organizations</h5>
-                            <h3 class="mb-0" id="active-organizations">8</h3>
+                            <h3 class="mb-0" id="org-active">0</h3>
                             <small>Click to refresh</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card bg-info text-white">
+                    <div class="card bg-info text-white" id="org-pending-card">
                         <div class="card-body text-center">
                             <h5 class="card-title">Pending Approval</h5>
-                            <h3 class="mb-0" id="pending-organizations">3</h3>
+                            <h3 class="mb-0" id="org-pending">0</h3>
                             <small>Click to refresh</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <div class="card bg-warning text-white">
+                    <div class="card bg-warning text-white" id="org-suspended-card">
                         <div class="card-body text-center">
                             <h5 class="card-title">Suspended</h5>
-                            <h3 class="mb-0" id="suspended-organizations">1</h3>
+                            <h3 class="mb-0" id="org-suspended">0</h3>
                             <small>Click to refresh</small>
                         </div>
                     </div>
@@ -122,84 +122,7 @@
                                 </tr>
                             </thead>
                             <tbody id="organizations-tbody">
-                                <tr>
-                                    <td>
-                                        <div>
-                                            <strong>Gaza Relief Foundation</strong>
-                                            <br>
-                                            <small class="text-muted">gaza.relief@example.com</small>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-info">Charity</span></td>
-                                    <td>+970 59 123 4567</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>Jan 15, 2024</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-outline-primary" onclick="viewOrganization(1)">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-warning" onclick="editOrganization(1)">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteOrganization(1)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>
-                                            <strong>Palestine Aid Network</strong>
-                                            <br>
-                                            <small class="text-muted">palestine.aid@example.com</small>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-secondary">NGO</span></td>
-                                    <td>+970 59 987 6543</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                    <td>Feb 20, 2024</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-outline-primary" onclick="viewOrganization(2)">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-warning" onclick="editOrganization(2)">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteOrganization(2)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div>
-                                            <strong>Humanitarian Support Group</strong>
-                                            <br>
-                                            <small class="text-muted">humanitarian@example.com</small>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-primary">Foundation</span></td>
-                                    <td>+970 59 555 1234</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>Mar 10, 2024</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-sm btn-outline-primary" onclick="viewOrganization(3)">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-warning" onclick="editOrganization(3)">
-                                                <i class="fa fa-edit"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteOrganization(3)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -278,6 +201,66 @@
     </div>
 </div>
 
+<!-- View/Edit Organization Modal -->
+<div class="modal fade" id="viewEditOrganizationModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewEditOrganizationModalTitle">Organization Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-organization-form">
+                    <input type="hidden" id="edit-org-id" name="id">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="edit-org-name" class="form-label">Organization Name</label>
+                            <input type="text" class="form-control" id="edit-org-name" name="name" required readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="edit-org-type" class="form-label">Organization Type</label>
+                            <input type="text" class="form-control" id="edit-org-type" name="type" required readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="edit-org-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="edit-org-email" name="email" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="edit-org-phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="edit-org-phone" name="phone" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-org-address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="edit-org-address" name="address" readonly>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="edit-org-status" class="form-label">Status</label>
+                            <input type="text" class="form-control" id="edit-org-status" name="status" readonly>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="edit-org-registration-date" class="form-label">Registration Date</label>
+                            <input type="text" class="form-control" id="edit-org-registration-date" name="registration_date" readonly>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-org-description" class="form-label">Description</label>
+                        <textarea class="form-control" id="edit-org-description" name="description" rows="3" readonly></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" id="edit-org-btn" style="display:none;" onclick="enableEditOrganization()">Edit</button>
+                <button type="button" class="btn btn-success" id="save-org-btn" style="display:none;" onclick="saveEditOrganization()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Toast for notifications -->
 <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999">
     <div id="organizations-toast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -315,35 +298,153 @@ function filterOrganizations() {
 }
 
 function viewOrganization(id) {
-    // In a real application, this would open a modal with organization details
-    showOrganizationsToast(`Viewing organization ID: ${id}`);
+    fetch(`/admin/organizations/api/${id}`)
+        .then(response => response.json())
+        .then(org => {
+            document.getElementById('viewEditOrganizationModalTitle').textContent = 'Organization Details';
+            document.getElementById('edit-org-id').value = org.id;
+            document.getElementById('edit-org-name').value = org.name;
+            document.getElementById('edit-org-type').value = org.type || '';
+            document.getElementById('edit-org-email').value = org.email || '';
+            document.getElementById('edit-org-phone').value = org.phone || '';
+            document.getElementById('edit-org-address').value = org.address || '';
+            document.getElementById('edit-org-status').value = org.status || '';
+            document.getElementById('edit-org-registration-date').value = org.registration_date || '';
+            document.getElementById('edit-org-description').value = org.description || '';
+            document.getElementById('edit-org-name').readOnly = true;
+            document.getElementById('edit-org-type').readOnly = true;
+            document.getElementById('edit-org-email').readOnly = true;
+            document.getElementById('edit-org-phone').readOnly = true;
+            document.getElementById('edit-org-address').readOnly = true;
+            document.getElementById('edit-org-status').readOnly = true;
+            document.getElementById('edit-org-registration-date').readOnly = true;
+            document.getElementById('edit-org-description').readOnly = true;
+            document.getElementById('edit-org-btn').style.display = 'inline-block';
+            document.getElementById('save-org-btn').style.display = 'none';
+            var modal = new bootstrap.Modal(document.getElementById('viewEditOrganizationModal'));
+            modal.show();
+        });
 }
-
 function editOrganization(id) {
-    // In a real application, this would open edit modal
-    showOrganizationsToast(`Editing organization ID: ${id}`);
+    fetch(`/admin/organizations/api/${id}`)
+        .then(response => response.json())
+        .then(org => {
+            document.getElementById('viewEditOrganizationModalTitle').textContent = 'Edit Organization';
+            document.getElementById('edit-org-id').value = org.id;
+            document.getElementById('edit-org-name').value = org.name || '';
+            document.getElementById('edit-org-type').value = org.type || '';
+            document.getElementById('edit-org-email').value = org.email || '';
+            document.getElementById('edit-org-phone').value = org.phone || '';
+            document.getElementById('edit-org-address').value = org.address || '';
+            document.getElementById('edit-org-status').value = org.status || '';
+            document.getElementById('edit-org-registration-date').value = org.registration_date || (org.created_at ? org.created_at.split('T')[0] : '');
+            document.getElementById('edit-org-description').value = org.description || '';
+            document.getElementById('edit-org-name').readOnly = false;
+            document.getElementById('edit-org-type').readOnly = false;
+            document.getElementById('edit-org-email').readOnly = false;
+            document.getElementById('edit-org-phone').readOnly = false;
+            document.getElementById('edit-org-address').readOnly = false;
+            document.getElementById('edit-org-status').readOnly = false;
+            document.getElementById('edit-org-registration-date').readOnly = false;
+            document.getElementById('edit-org-description').readOnly = false;
+            document.getElementById('edit-org-btn').style.display = 'none';
+            document.getElementById('save-org-btn').style.display = 'inline-block';
+            var modal = new bootstrap.Modal(document.getElementById('viewEditOrganizationModal'));
+            modal.show();
+        });
+}
+function enableEditOrganization() {
+    document.getElementById('edit-org-name').readOnly = false;
+    document.getElementById('edit-org-type').readOnly = false;
+    document.getElementById('edit-org-btn').style.display = 'none';
+    document.getElementById('save-org-btn').style.display = 'inline-block';
+}
+function saveEditOrganization() {
+    const id = document.getElementById('edit-org-id').value;
+    const formData = new FormData(document.getElementById('edit-organization-form'));
+    fetch(`/admin/organizations/api/${id}`, {
+        method: 'PUT',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        showOrganizationsToast('Organization updated successfully!', 'success');
+        var modal = bootstrap.Modal.getInstance(document.getElementById('viewEditOrganizationModal'));
+        modal.hide();
+        loadOrganizations();
+    })
+    .catch(() => showOrganizationsToast('Error updating organization', 'danger'));
 }
 
-function deleteOrganization(id) {
-    if (confirm('Are you sure you want to delete this organization?')) {
-        // In a real application, this would send AJAX delete request
-        showOrganizationsToast('Organization deleted successfully!', 'success');
-    }
+// جلب المنظمات من API وعرضها في الجدول
+function loadOrganizations() {
+    fetch('/admin/organizations/api')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('organizations-tbody');
+            tbody.innerHTML = '';
+            data.forEach(org => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><strong>${org.name}</strong><br><small class='text-muted'>${org.email || ''}</small></td>
+                        <td>${org.type ? `<span class='badge bg-info'>${org.type.charAt(0).toUpperCase() + org.type.slice(1)}</span>` : ''}</td>
+                        <td>${org.phone || ''}</td>
+                        <td>${org.status ? `<span class='badge bg-${org.status === 'active' ? 'success' : org.status === 'pending' ? 'warning' : org.status === 'suspended' ? 'danger' : 'secondary'}'>${org.status.charAt(0).toUpperCase() + org.status.slice(1)}</span>` : ''}</td>
+                        <td>${org.registration_date || (org.created_at ? new Date(org.created_at).toLocaleDateString() : '')}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-sm btn-outline-primary" onclick="viewOrganization(${org.id})"><i class="fa fa-eye"></i></button>
+                                <button class="btn btn-sm btn-outline-warning" onclick="editOrganization(${org.id})"><i class="fa fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteOrganization(${org.id})"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        });
 }
 
+// إضافة منظمة جديدة عبر API
 function saveOrganization() {
     const form = document.getElementById('add-organization-form');
     const formData = new FormData(form);
-    
-    // In a real application, this would send AJAX request to save organization
-    showOrganizationsToast('Organization added successfully!', 'success');
-    
-    // Close modal
-    const modal = bootstrap.Modal.getInstance(document.getElementById('addOrganizationModal'));
-    modal.hide();
-    
-    // Reset form
-    form.reset();
+    fetch('/admin/organizations/api', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        showOrganizationsToast('Organization added successfully!', 'success');
+        const modal = bootstrap.Modal.getInstance(document.getElementById('addOrganizationModal'));
+        modal.hide();
+        form.reset();
+        loadOrganizations();
+    })
+    .catch(() => showOrganizationsToast('Error adding organization', 'danger'));
+}
+
+// حذف منظمة عبر API
+function deleteOrganization(id) {
+    if (confirm('Are you sure you want to delete this organization?')) {
+        fetch(`/admin/organizations/api/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(() => {
+            showOrganizationsToast('Organization deleted successfully!', 'success');
+            loadOrganizations();
+        })
+        .catch(() => showOrganizationsToast('Error deleting organization', 'danger'));
+    }
 }
 
 // Make stats cards clickable for refresh
@@ -359,5 +460,27 @@ document.querySelectorAll('.card').forEach(card => {
 setInterval(function() {
     refreshOrganizations();
 }, 30000);
+
+function loadOrganizationStats() {
+    fetch('/admin/organizations/stats')
+        .then(response => response.json())
+        .then(stats => {
+            document.getElementById('org-total').textContent = stats.total;
+            document.getElementById('org-active').textContent = stats.active;
+            document.getElementById('org-pending').textContent = stats.pending;
+            document.getElementById('org-suspended').textContent = stats.suspended;
+        });
+}
+
+// تحميل المنظمات عند تحميل الصفحة
+window.addEventListener('DOMContentLoaded', function() {
+    loadOrganizationStats();
+    loadOrganizations();
+    // تحديث الإحصائيات عند الضغط على أي بطاقة
+    document.getElementById('org-total-card').onclick = loadOrganizationStats;
+    document.getElementById('org-active-card').onclick = loadOrganizationStats;
+    document.getElementById('org-pending-card').onclick = loadOrganizationStats;
+    document.getElementById('org-suspended-card').onclick = loadOrganizationStats;
+});
 </script>
 @endsection 

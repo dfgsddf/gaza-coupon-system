@@ -42,30 +42,19 @@ class Campaign extends Model
     }
 
     /**
+     * Get the coupons for the campaign.
+     */
+    public function coupons(): HasMany
+    {
+        return $this->hasMany(Coupon::class);
+    }
+
+    /**
      * Get the donations for the campaign.
      */
     public function donations(): HasMany
     {
         return $this->hasMany(CampaignDonation::class);
-    }
-
-    /**
-     * Get the progress percentage of the campaign.
-     */
-    public function getProgressPercentageAttribute(): float
-    {
-        if ($this->goal <= 0) {
-            return 0;
-        }
-        return min(100, ($this->current_amount / $this->goal) * 100);
-    }
-
-    /**
-     * Get the remaining amount needed.
-     */
-    public function getRemainingAmountAttribute(): float
-    {
-        return max(0, $this->goal - $this->current_amount);
     }
 
     /**
@@ -85,31 +74,28 @@ class Campaign extends Model
     }
 
     /**
-     * Check if the campaign has reached its goal.
+     * Check if the campaign is currently running.
      */
-    public function hasReachedGoal(): bool
+    public function isRunning(): bool
     {
-        return $this->current_amount >= $this->goal;
+        $now = now()->toDateString();
+        return $this->start_date <= $now && $this->end_date >= $now && $this->isActive();
     }
 
     /**
-     * Get the total number of donations.
+     * Get the total number of coupons.
      */
-    public function getTotalDonationsCountAttribute(): int
+    public function getTotalCouponsCountAttribute(): int
     {
-        return $this->donations()->count();
+        return $this->coupons()->count();
     }
 
     /**
-     * Get the average donation amount.
+     * Get the total value of coupons issued.
      */
-    public function getAverageDonationAttribute(): float
+    public function getTotalCouponsValueAttribute(): float
     {
-        $count = $this->donations()->count();
-        if ($count === 0) {
-            return 0;
-        }
-        return $this->current_amount / $count;
+        return $this->coupons()->sum('amount');
     }
 
     /**
@@ -121,18 +107,21 @@ class Campaign extends Model
     }
 
     /**
-     * Scope to get featured campaigns.
+     * Scope to get campaigns by organization.
      */
-    public function scopeFeatured($query)
+    public function scopeByOrganization($query, $organizationId)
     {
-        return $query->where('is_featured', true);
+        return $query->where('organization_id', $organizationId);
     }
 
     /**
-     * Scope to get campaigns by charity.
+     * Scope to get running campaigns.
      */
-    public function scopeByCharity($query, $charityId)
+    public function scopeRunning($query)
     {
-        return $query->where('charity_id', $charityId);
+        $now = now()->toDateString();
+        return $query->where('status', 'active')
+                    ->where('start_date', '<=', $now)
+                    ->where('end_date', '>=', $now);
     }
 } 

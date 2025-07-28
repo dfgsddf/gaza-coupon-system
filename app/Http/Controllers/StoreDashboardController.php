@@ -262,4 +262,10 @@ class StoreDashboardController extends Controller
 
         return view('store.transaction-details', compact('transaction'));
     }
+
+    public function storeList()
+    {
+        $stores = \App\Models\User::where('role', 'store')->get();
+        return view('store.index', compact('stores'));
+    }
 } 

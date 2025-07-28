@@ -16,40 +16,40 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if user is authenticated
+        // التحقق من تسجيل الدخول
         if (!Auth::check()) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Authentication required'
+                    'message' => 'يرجى تسجيل الدخول للوصول إلى هذه الصفحة'
                 ], 401);
             }
             return redirect()->route('login.form')->with('error', 'يرجى تسجيل الدخول للوصول إلى هذه الصفحة');
         }
 
-        // Check if user has admin role
+        // التحقق من دور المستخدم
         if (Auth::user()->role !== 'admin') {
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Access denied. Admin role required.'
+                    'message' => 'غير مصرح لك بالدخول إلى هذه الصفحة'
                 ], 403);
             }
             
-            // Redirect based on user role
+            // التوجيه بناءً على دور المستخدم
             $user = Auth::user();
             switch ($user->role) {
-                case 'charity':
-                    return redirect()->route('charity.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة التحكم الخاصة بالمشرفين');
                 case 'store':
-                    return redirect()->route('store.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة التحكم الخاصة بالمشرفين');
+                    return redirect()->route('store.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة تحكم المشرف');
                 case 'beneficiary':
-                    return redirect()->route('beneficiary.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة التحكم الخاصة بالمشرفين');
+                    return redirect()->route('beneficiary.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة تحكم المشرف');
+                case 'charity':
+                    return redirect()->route('charity.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة تحكم المشرف');
                 default:
                     return redirect()->route('home')->with('error', 'غير مسموح لك بالوصول إلى هذه الصفحة');
             }
         }
-
+        
         return $next($request);
     }
 }

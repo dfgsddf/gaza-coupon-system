@@ -67,5 +67,8 @@ class Kernel extends HttpKernel
         
         // ✅ Middleware للتحقق من الصلاحيات
         'permission' => \App\Http\Middleware\CheckPermission::class,
+        
+        // ✅ Middleware للتحقق من اكتمال الملف الشخصي للمستفيد
+        'check.beneficiary.profile' => \App\Http\Middleware\CheckBeneficiaryProfile::class,
     ];
 }

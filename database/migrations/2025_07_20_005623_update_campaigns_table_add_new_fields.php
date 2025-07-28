@@ -50,10 +50,13 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('campaigns', function (Blueprint $table) {
-            // Remove indexes
-            $table->dropIndexIfExists('campaigns_charity_id_status_index');
-            $table->dropIndexIfExists('campaigns_status_is_featured_index');
-            
+            // Remove indexes (will error if index does not exist)
+            try {
+                $table->dropIndex('campaigns_charity_id_status_index');
+            } catch (\Exception $e) {}
+            try {
+                $table->dropIndex('campaigns_status_is_featured_index');
+            } catch (\Exception $e) {}
             // Remove columns
             $table->dropColumn([
                 'description',

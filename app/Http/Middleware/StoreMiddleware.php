@@ -16,40 +16,40 @@ class StoreMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if user is authenticated
+        // التحقق من تسجيل الدخول
         if (!Auth::check()) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Authentication required'
+                    'message' => 'يرجى تسجيل الدخول للوصول إلى هذه الصفحة'
                 ], 401);
             }
             return redirect()->route('login.form')->with('error', 'يرجى تسجيل الدخول للوصول إلى هذه الصفحة');
         }
 
-        // Check if user has store role
+        // التحقق من دور المستخدم
         if (Auth::user()->role !== 'store') {
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Access denied. Store role required.'
+                    'message' => 'غير مصرح لك بالدخول إلى هذه الصفحة'
                 ], 403);
             }
             
-            // Redirect based on user role
+            // التوجيه بناءً على دور المستخدم
             $user = Auth::user();
             switch ($user->role) {
                 case 'admin':
-                    return redirect()->route('admin.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة التحكم الخاصة بالمتاجر');
-                case 'charity':
-                    return redirect()->route('charity.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة التحكم الخاصة بالمتاجر');
+                    return redirect()->route('admin.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة تحكم المتاجر');
                 case 'beneficiary':
-                    return redirect()->route('beneficiary.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة التحكم الخاصة بالمتاجر');
+                    return redirect()->route('beneficiary.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة تحكم المتاجر');
+                case 'charity':
+                    return redirect()->route('charity.dashboard')->with('error', 'غير مسموح لك بالوصول إلى لوحة تحكم المتاجر');
                 default:
                     return redirect()->route('home')->with('error', 'غير مسموح لك بالوصول إلى هذه الصفحة');
             }
         }
-
+        
         return $next($request);
     }
 } 

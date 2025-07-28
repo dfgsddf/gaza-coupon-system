@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StoreDashboardController;
+use App\Http\Controllers\BeneficiaryProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,11 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [RegisterController::class, 'register']);
+Route::post('/register', [RegisterController::class, 'register']);
+
+// Beneficiary-specific registration routes
+Route::get('/beneficiary-register', [RegisterController::class, 'showBeneficiaryRegistrationForm'])->name('beneficiary.register.form');
+Route::post('/beneficiary-register', [RegisterController::class, 'registerBeneficiary'])->name('beneficiary.register');
 });
 
 /*
@@ -70,6 +75,8 @@ Route::post('/beneficiaries', [BeneficiaryController::class, 'store'])->name('be
 Route::get('/beneficiaries/register', fn () => redirect()->route('beneficiaries.create'));
 Route::post('/beneficiaries/register', [BeneficiaryController::class, 'store']);
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes (Protected by auth + admin middleware)
@@ -78,13 +85,13 @@ Route::post('/beneficiaries/register', [BeneficiaryController::class, 'store']);
 Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     
-    // Admin Dashboard AJAX endpoints
-    Route::get('/dashboard/stats', [AdminDashboardController::class, 'getStats'])->name('admin.dashboard.stats');
-    Route::get('/dashboard/activity', [AdminDashboardController::class, 'getActivity'])->name('admin.dashboard.activity');
-    Route::get('/dashboard/users', [AdminDashboardController::class, 'getUsers'])->name('admin.dashboard.users');
-    
     // User Management
-    Route::get('/users', [UserManagementController::class, 'index'])->name('admin.users.index');
+    Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
     Route::patch('/users/{user}/status', [UserController::class, 'updateStatus'])->name('admin.users.updateStatus');
     
     // Contact Messages Management
@@ -107,6 +114,22 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
     // Admin Static Pages (Protected)
     Route::view('/organizations', 'admin.organizations')->name('admin.organizations');
     Route::view('/stores', 'admin.stores')->name('admin.stores');
+
+    // Organization Management API
+    Route::get('/organizations/api', [\App\Http\Controllers\Admin\OrganizationController::class, 'index'])->name('admin.organizations.api.index');
+    Route::post('/organizations/api', [\App\Http\Controllers\Admin\OrganizationController::class, 'store'])->name('admin.organizations.api.store');
+    Route::get('/organizations/api/{id}', [\App\Http\Controllers\Admin\OrganizationController::class, 'show'])->name('admin.organizations.api.show');
+    Route::put('/organizations/api/{id}', [\App\Http\Controllers\Admin\OrganizationController::class, 'update'])->name('admin.organizations.api.update');
+    Route::delete('/organizations/api/{id}', [\App\Http\Controllers\Admin\OrganizationController::class, 'destroy'])->name('admin.organizations.api.destroy');
+    Route::get('/organizations/stats', [\App\Http\Controllers\Admin\OrganizationController::class, 'stats'])->name('admin.organizations.stats');
+
+    // Store Management API
+    Route::get('/stores/api', [\App\Http\Controllers\Admin\StoreController::class, 'index'])->name('admin.stores.api.index');
+    Route::post('/stores/api', [\App\Http\Controllers\Admin\StoreController::class, 'store'])->name('admin.stores.api.store');
+    Route::get('/stores/api/{id}', [\App\Http\Controllers\Admin\StoreController::class, 'show'])->name('admin.stores.api.show');
+    Route::put('/stores/api/{id}', [\App\Http\Controllers\Admin\StoreController::class, 'update'])->name('admin.stores.api.update');
+    Route::delete('/stores/api/{id}', [\App\Http\Controllers\Admin\StoreController::class, 'destroy'])->name('admin.stores.api.destroy');
+    Route::get('/stores/stats', [\App\Http\Controllers\Admin\StoreController::class, 'stats'])->name('admin.stores.stats');
 });
 
 /*
@@ -119,53 +142,67 @@ Route::middleware(['auth', \App\Http\Middleware\StoreMiddleware::class])->prefix
     Route::get('/dashboard', [StoreDashboardController::class, 'index'])->name('store.dashboard');
     
     // Coupon Management
-    Route::get('/coupons', [StoreDashboardController::class, 'coupons'])->name('store.coupons');
-    Route::post('/validate-coupon', [StoreController::class, 'validateCoupon'])->name('store.validateCoupon');
-    Route::post('/redeem-coupon', [StoreController::class, 'redeemCoupon'])->name('store.redeemCoupon');
+    Route::middleware(\App\Http\Middleware\CheckPermission::class . ':store.coupons.manage')->group(function() {
+        Route::get('/coupons', [StoreDashboardController::class, 'coupons'])->name('store.coupons');
+        Route::post('/validate-coupon', [StoreController::class, 'validateCoupon'])->name('store.validateCoupon');
+        Route::post('/redeem-coupon', [StoreController::class, 'redeemCoupon'])->name('store.redeemCoupon');
+    });
     
     // Transactions
-    Route::get('/transactions', [StoreDashboardController::class, 'transactions'])->name('store.transactions');
-    Route::get('/transactions/{transaction}/details', [StoreDashboardController::class, 'transactionDetails'])->name('store.transaction.details');
+    Route::middleware(\App\Http\Middleware\CheckPermission::class . ':store.transactions.view')->group(function() {
+        Route::get('/transactions', [StoreDashboardController::class, 'transactions'])->name('store.transactions');
+        Route::get('/transactions/{transaction}/details', [StoreDashboardController::class, 'transactionDetails'])->name('store.transaction.details');
+    });
     
     // Reports
-    Route::get('/reports', [StoreDashboardController::class, 'reports'])->name('store.reports');
+    Route::get('/reports', [StoreDashboardController::class, 'reports'])
+        ->name('store.reports')
+        ->middleware(\App\Http\Middleware\CheckPermission::class . ':store.reports.view');
     
     // Settings
-    Route::get('/settings', [StoreDashboardController::class, 'settings'])->name('store.settings');
-    Route::post('/settings/profile', [StoreDashboardController::class, 'updateProfile'])->name('store.settings.profile');
-    Route::post('/settings/password', [StoreDashboardController::class, 'updatePassword'])->name('store.settings.password');
-    Route::post('/settings/notifications', [StoreDashboardController::class, 'updateNotifications'])->name('store.settings.notifications');
+    Route::middleware(\App\Http\Middleware\CheckPermission::class . ':store.settings.manage')->group(function() {
+        Route::get('/settings', [StoreDashboardController::class, 'settings'])->name('store.settings');
+        Route::post('/settings/profile', [StoreDashboardController::class, 'updateProfile'])->name('store.settings.profile');
+        Route::post('/settings/password', [StoreDashboardController::class, 'updatePassword'])->name('store.settings.password');
+        Route::post('/settings/notifications', [StoreDashboardController::class, 'updateNotifications'])->name('store.settings.notifications');
+    });
     
-    // AJAX endpoints
-    Route::get('/stats', [StoreController::class, 'getStats'])->name('store.stats');
-    Route::get('/recent-transactions', [StoreController::class, 'getRecentTransactions'])->name('store.recentTransactions');
+    Route::get('/list', [StoreDashboardController::class, 'storeList'])
+        ->name('store.list')
+        ->middleware(\App\Http\Middleware\CheckPermission::class . ':store.list.view');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Beneficiary Routes (Protected by auth + beneficiary middleware)
+| Beneficiary Profile Routes (Protected by auth only for profile completion)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', \App\Http\Middleware\BeneficiaryMiddleware::class])->group(function () {
-    // Dashboard
-    Route::get('/beneficiary/dashboard', [BeneficiaryDashboardController::class, 'index'])->name('beneficiary.dashboard');
+Route::middleware('auth')->group(function () {
+    // Profile completion routes (only for beneficiaries)
+    Route::get('/beneficiary/profile/form', [BeneficiaryProfileController::class, 'showProfileForm'])->name('beneficiary.profile.form');
+    Route::post('/beneficiary/profile', [BeneficiaryProfileController::class, 'storeProfile'])->name('beneficiary.profile.store');
+    Route::get('/beneficiary/profile/check', [BeneficiaryProfileController::class, 'checkProfileCompleteness'])->name('beneficiary.profile.check');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Beneficiary Routes (Limited to Coupons Only)
+|--------------------------------------------------------------------------
+*/
+use App\Http\Controllers\BeneficiaryCouponController;
+
+Route::middleware(['auth', 'beneficiary', 'check.beneficiary.profile'])->group(function () {
+    // Redirect dashboard to coupons (المستفيدون يصلون مباشرة للكوبونات)
+    Route::get('/beneficiary/dashboard', function() {
+        return redirect()->route('beneficiary.coupons.index');
+    })->name('beneficiary.dashboard');
     
-    // Settings
-    Route::get('/beneficiary/settings', [BeneficiaryDashboardController::class, 'settings'])->name('beneficiary.settings');
-    Route::post('/beneficiary/settings/profile', [BeneficiaryDashboardController::class, 'updateProfile'])->name('beneficiary.settings.profile');
-    Route::post('/beneficiary/settings/password', [BeneficiaryDashboardController::class, 'updatePassword'])->name('beneficiary.settings.password');
-    Route::post('/beneficiary/settings/notifications', [BeneficiaryDashboardController::class, 'updateNotifications'])->name('beneficiary.settings.notifications');
-    
-    // Requests
-    Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
-    Route::get('/requests/create', [RequestController::class, 'create'])->name('requests.create');
-    Route::post('/requests', [RequestController::class, 'store'])->name('requests.store');
-    Route::get('/requests/{request}/details', [RequestController::class, 'details'])->name('requests.details');
-    
-    // Coupons
-    Route::get('/coupons', [CouponController::class, 'index'])->name('coupons.index');
-    Route::get('/coupons/{coupon}', [CouponController::class, 'show'])->name('coupons.show');
-    Route::get('/coupons/{coupon}/details', [CouponController::class, 'details'])->name('coupons.details');
+    // Coupons Only (الوظيفة الوحيدة المسموحة للمستفيدين)
+    Route::prefix('beneficiary/coupons')->name('beneficiary.coupons.')->group(function() {
+        Route::get('/', [BeneficiaryCouponController::class, 'index'])->name('index');
+        Route::get('/{coupon}', [BeneficiaryCouponController::class, 'show'])->name('show');
+        Route::get('/{coupon}/print', [BeneficiaryCouponController::class, 'print'])->name('print');
+    });
 });
 
 /*
@@ -246,6 +283,11 @@ Route::middleware(['auth', \App\Http\Middleware\CharityMiddleware::class])->pref
     Route::get('/settings', fn () => view('charity.settings'))
         ->name('charity.settings')
         ->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.settings.view');
+
+    // Charity Coupons Management
+    Route::get('/coupons', [\App\Http\Controllers\CharityDashboardController::class, 'coupons'])->name('charity.coupons')->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.coupons.view');
+    Route::get('/coupons/create', [\App\Http\Controllers\CharityDashboardController::class, 'createCoupon'])->name('charity.coupons.create')->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.coupons.create');
+    Route::post('/coupons', [\App\Http\Controllers\CharityDashboardController::class, 'storeCoupon'])->name('charity.coupons.store')->middleware(\App\Http\Middleware\CheckPermission::class . ':charity.coupons.create');
 });
 
 /*
@@ -257,6 +299,11 @@ Route::view('/stores', 'store')->name('stores.index');
 Route::view('/store', 'store')->name('store');
 Route::view('/charity', 'charity')->name('charity');
 
+// Charity login redirect - for users who want to access charity dashboard
+Route::get('/charity/login', function () {
+    return redirect()->route('login.form')->with('info', 'يرجى تسجيل الدخول للوصول إلى لوحة التحكم الخاصة بالجمعيات الخيرية');
+})->name('charity.login');
+
 /*
 |--------------------------------------------------------------------------
 | Redirect Routes (Public)
@@ -265,7 +312,6 @@ Route::view('/charity', 'charity')->name('charity');
 Route::redirect('/admin', '/admin/dashboard');
 Route::redirect('/beneficiary', '/beneficiary/dashboard');
 Route::redirect('/store', '/store/dashboard');
-Route::redirect('/charity', '/charity/dashboard');
 
 /*
 |--------------------------------------------------------------------------
@@ -344,3 +390,9 @@ if (app()->environment('local', 'development')) {
         return 'Admin middleware works!';
     })->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class]);
 }
+
+
+
+
+
+

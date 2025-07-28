@@ -20,7 +20,7 @@
                 </a>
                 <form action="{{ route('logout') }}" method="POST" id="logout-form">
                     @csrf
-                    <button type="button" class="btn btn-link text-white text-start p-0" onclick="confirmLogout()">
+                    <button type="submit" class="btn btn-link text-white text-start p-0">
                         <i class="fa-solid fa-right-from-bracket"></i> Logout
                     </button>
                 </form>
@@ -104,6 +104,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Type</th>
+                                <th>Description</th>
                                 <th>Date</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -114,6 +115,7 @@
                                 <tr class="request-row" data-request-id="{{ $req->id }}">
                                     <td>{{ $req->id }}</td>
                                     <td>{{ ucfirst($req->type) }}</td>
+                                    <td>{{ $req->description ?? '-' }}</td>
                                     <td>{{ $req->created_at->format('M d, Y') }}</td>
                                     <td>
                                         <span class="badge status-badge
@@ -124,14 +126,14 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-info" onclick="viewRequestDetails({{ $req->id }})">
+                                        <a href="{{ route('requests.details', $req->id) }}" class="btn btn-sm btn-outline-info">
                                             <i class="fa-solid fa-eye"></i>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No requests found.</td>
+                                    <td colspan="6" class="text-center text-muted">لا توجد طلبات بعد.</td>
                                 </tr>
                             @endforelse
                             </tbody>

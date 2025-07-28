@@ -15,6 +15,11 @@ class RegisterController extends Controller
         return view('auth.register');
     }
 
+    public function showBeneficiaryRegistrationForm()
+    {
+        return view('auth.beneficiary-register');
+    }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -53,6 +58,45 @@ class RegisterController extends Controller
             $redirectRoute = $this->getRedirectRouteByRole($request->role);
             
             return redirect()->route($redirectRoute)->with('success', 'تم التسجيل بنجاح! مرحباً بك في نظام قسائم غزة.');
+
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'حدث خطأ أثناء التسجيل. يرجى المحاولة مرة أخرى.']);
+        }
+    }
+
+    public function registerBeneficiary(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:6',
+            'phone' => 'required|string|max:20',
+        ], [
+            'name.required' => 'الاسم مطلوب',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.email' => 'البريد الإلكتروني غير صحيح',
+            'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
+            'password.required' => 'كلمة المرور مطلوبة',
+            'password.confirmed' => 'كلمة المرور غير متطابقة',
+            'password.min' => 'كلمة المرور يجب أن تكون 6 أحرف على الأقل',
+            'phone.required' => 'رقم الهاتف مطلوب',
+        ]);
+
+        try {
+            // Force role to be 'beneficiary' regardless of input
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'beneficiary', // Force beneficiary role
+                'phone' => $request->phone,
+                'status' => 'active',
+            ]);
+
+            // Auto-login the user after registration
+            Auth::login($user);
+
+            return redirect()->route('beneficiary.profile.form')->with('success', 'تم تسجيلك بنجاح! يرجى إكمال معلوماتك الشخصية للمتابعة.');
 
         } catch (\Exception $e) {
             return back()->withInput()->withErrors(['error' => 'حدث خطأ أثناء التسجيل. يرجى المحاولة مرة أخرى.']);

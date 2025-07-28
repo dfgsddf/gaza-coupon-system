@@ -654,4 +654,38 @@ class CharityDashboardController extends Controller
             ], 500);
         }
     }
+
+    // صفحة إدارة الكوبونات
+    public function coupons()
+    {
+        $charityId = auth()->id();
+        $coupons = \App\Models\Coupon::where('charity_id', $charityId)->latest()->get();
+        return view('charity.coupons', compact('coupons'));
+    }
+
+    // عرض نموذج إنشاء كوبون جديد
+    public function createCoupon()
+    {
+        return view('charity.coupons_create');
+    }
+
+    // حفظ كوبون جديد
+    public function storeCoupon(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string|unique:coupons,code',
+            'value' => 'required|numeric|min:1',
+            'description' => 'nullable|string',
+            'expiry_date' => 'required|date|after:today',
+        ]);
+        $coupon = new \App\Models\Coupon();
+        $coupon->code = $request->code;
+        $coupon->value = $request->value;
+        $coupon->description = $request->description;
+        $coupon->expiry_date = $request->expiry_date;
+        $coupon->charity_id = auth()->id();
+        $coupon->redeemed = false;
+        $coupon->save();
+        return redirect()->route('charity.coupons')->with('success', 'تم إنشاء الكوبون بنجاح');
+    }
 } 

@@ -11,7 +11,7 @@ class RequestController extends Controller
     // عرض الطلبات الخاصة بالمستفيد الحالي
     public function index()
     {
-        $requests = RequestModel::where('user_id', Auth::id())->latest()->get();
+        $requests = RequestModel::latest()->get();
         return view('beneficiary.requests.index', compact('requests'));
     }
 
@@ -24,16 +24,48 @@ class RequestController extends Controller
     // تخزين الطلب الجديد
     public function store(HttpRequest $request)
     {
-        $request->validate([
-            'type' => 'required|in:monthly,urgent,emergency',
-        ]);
+        try {
+            $validated = $request->validate([
+                'type' => 'required|in:monthly,urgent,emergency',
+                'description' => 'nullable|string|max:1000',
+            ]);
 
-        RequestModel::create([
-            'user_id' => Auth::id(),
-            'type' => $request->type,
-            'status' => 'processing',
-        ]);
+            $newRequest = RequestModel::create([
+                'user_id' => Auth::id(),
+                'type' => $validated['type'],
+                'status' => 'processing',
+                'description' => $validated['description'],
+            ]);
 
-        return redirect()->route('requests.index')->with('success', 'Request submitted successfully.');
+            \Log::info('Request created successfully', [
+                'request_id' => $newRequest->id,
+                'user_id' => Auth::id(),
+                'type' => $validated['type']
+            ]);
+
+            return redirect()->route('requests.details', $newRequest->id)
+                ->with('success', 'تم إرسال الطلب بنجاح!');
+
+        } catch (\Exception $e) {
+            \Log::error('Error creating request', [
+                'user_id' => Auth::id(),
+                'error' => $e->getMessage(),
+                'data' => $request->all()
+            ]);
+
+            return back()
+                ->withInput()
+                ->withErrors(['error' => 'حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.']);
+        }
+    }
+
+    // عرض تفاصيل الطلب
+    public function details(RequestModel $request)
+    {
+        // حماية: السماح فقط لصاحب الطلب
+        if ($request->user_id !== Auth::id()) {
+            abort(403);
+        }
+        return view('beneficiary.requests.details', compact('request'));
     }
 }

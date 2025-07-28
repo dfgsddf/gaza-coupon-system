@@ -15,7 +15,7 @@ class BeneficiaryDashboardController extends Controller
     {
         $user = Auth::user();
 
-        $requests = $user->requests()->latest()->take(5)->get();
+        $requests = $user->requests()->latest()->get();
         $coupons = $user->coupons()->latest()->take(4)->get();
 
         return view('beneficiary.dashboard', compact('requests', 'coupons'));

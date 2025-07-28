@@ -17,6 +17,7 @@ class RequestModel extends Model
         'user_id',
         'type',
         'status',
+        'description',
     ];
 
     /**
