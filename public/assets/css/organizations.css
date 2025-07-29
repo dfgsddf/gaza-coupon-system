@@ -1,0 +1,1525 @@
+/* 
+ * Organizations CSS for Gaza Coupon System
+ * Modern, responsive design for charity organizations management
+ */
+
+/* ===== ORGANIZATIONS HEADER ===== */
+.organizations-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+    position: relative;
+    overflow: hidden;
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.organizations-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.header-info {
+    color: white;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.page-title i {
+    font-size: 2rem;
+    margin-left: 1rem;
+    color: #fbbf24;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-add-organization {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    border: none;
+    color: #1e293b;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+}
+
+.btn-add-organization:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+    color: #1e293b;
+}
+
+/* ===== STATISTICS SECTION ===== */
+.stats-section {
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+}
+
+.stats-card-primary::before {
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+.stats-card-success::before {
+    background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.stats-card-warning::before {
+    background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.stats-card-danger::before {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stats-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.stats-card-primary .stats-icon {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+}
+
+.stats-card-success .stats-icon {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.stats-card-warning .stats-icon {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+.stats-card-danger .stats-icon {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.stats-info {
+    flex: 1;
+}
+
+.stats-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+    line-height: 1;
+}
+
+.stats-label {
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.stats-trend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.stats-card-warning .stats-trend {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+.stats-card-danger .stats-trend {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+/* ===== FILTERS SECTION ===== */
+.filters-section {
+    margin-bottom: 2rem;
+}
+
+.filters-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.filters-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.filters-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.filters-content {
+    padding: 1.5rem;
+}
+
+.search-group,
+.filter-group,
+.filter-actions {
+    position: relative;
+}
+
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-input {
+    padding-left: 2.5rem;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    z-index: 2;
+}
+
+.filter-select {
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.btn-filter {
+    border-radius: 12px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-filter:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* ===== ORGANIZATIONS SECTION ===== */
+.organizations-section {
+    margin-bottom: 2rem;
+}
+
+.organizations-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.organizations-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.organizations-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.organizations-title h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.organizations-count {
+    background: #3b82f6;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.organizations-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.organizations-content {
+    padding: 0;
+}
+
+.organizations-table {
+    margin: 0;
+    border: none;
+}
+
+.organizations-table thead th {
+    background: #f8fafc;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.organizations-table tbody td {
+    border: none;
+    padding: 1rem 1.5rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.organizations-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* ===== ORGANIZATION ROWS ===== */
+.organization-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.organization-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.organization-details {
+    flex: 1;
+}
+
+.organization-name {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
+
+.organization-email {
+    color: #64748b;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.type-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.type-charity {
+    background: rgba(59, 130, 246, 0.1);
+    color: #1d4ed8;
+}
+
+.type-ngo {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.type-foundation {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+.type-association {
+    background: rgba(139, 92, 246, 0.1);
+    color: #7c3aed;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.contact-item i {
+    color: #94a3b8;
+    width: 16px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.status-active {
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
+}
+
+.status-pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #d97706;
+}
+
+.status-suspended {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+}
+
+.status-inactive {
+    background: rgba(100, 116, 139, 0.1);
+    color: #475569;
+}
+
+.date-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.date-info i {
+    color: #94a3b8;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-buttons .btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.action-buttons .btn:hover {
+    transform: translateY(-1px);
+}
+
+/* ===== EMPTY STATE ===== */
+.organizations-empty {
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+.empty-state {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.empty-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: #94a3b8;
+}
+
+.empty-state h5 {
+    color: #475569;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== MODAL ENHANCEMENTS ===== */
+.modal-content {
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 16px 16px 0 0;
+}
+
+.modal-title {
+    font-weight: 600;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    border-radius: 0 0 16px 16px;
+    padding: 1.5rem 2rem;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1199.98px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+}
+
+/* ===== SIDEBAR COMPATIBILITY ===== */
+.main-content-with-sidebar .organizations-header,
+.main-content-with-sidebar .stats-section,
+.main-content-with-sidebar .filters-section,
+.main-content-with-sidebar .organizations-section {
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.main-content-with-sidebar .container-fluid {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+@media (max-width: 991.98px) {
+    .main-content-with-sidebar .organizations-header,
+    .main-content-with-sidebar .stats-section,
+    .main-content-with-sidebar .filters-section,
+    .main-content-with-sidebar .organizations-section {
+        margin-right: 0;
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .stats-card-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .stats-trend {
+        justify-content: center;
+    }
+    
+    .organizations-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .organizations-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .organizations-header {
+        padding: 1.5rem;
+    }
+    
+    .page-title {
+        font-size: 1.75rem;
+    }
+    
+    .page-subtitle {
+        font-size: 1rem;
+    }
+    
+    .stats-card {
+        padding: 1rem;
+    }
+    
+    .stats-number {
+        font-size: 1.5rem;
+    }
+    
+    .filters-content {
+        padding: 1rem;
+    }
+    
+    .organizations-table thead th,
+    .organizations-table tbody td {
+        padding: 0.75rem 1rem;
+    }
+    
+    .organization-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .organization-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .action-buttons .btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .organizations-header {
+        padding: 1rem;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+    
+    .filters-content .row {
+        margin: 0;
+    }
+    
+    .filters-content .col-lg-4,
+    .filters-content .col-lg-3,
+    .filters-content .col-lg-2,
+    .filters-content .col-md-6 {
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .organizations-table {
+        font-size: 0.85rem;
+    }
+    
+    .organizations-table thead th,
+    .organizations-table tbody td {
+        padding: 0.5rem;
+    }
+    
+    .organization-name {
+        font-size: 0.9rem;
+    }
+    
+    .organization-email {
+        font-size: 0.8rem;
+    }
+    
+    .type-badge,
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.organization-row {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+.stats-card {
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.filters-card,
+.organizations-card {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* ===== LOADING STATES ===== */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #e2e8f0;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    .stats-card,
+    .organization-row,
+    .filters-card,
+    .organizations-card {
+        animation: none;
+    }
+    
+    .stats-card:hover {
+        transform: none;
+    }
+    
+    .btn-add-organization:hover,
+    .btn-filter:hover,
+    .action-buttons .btn:hover {
+        transform: none;
+    }
+}
+
+/* ===== FOCUS STATES ===== */
+.btn:focus,
+.form-control:focus,
+.form-select:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+    .stats-card {
+        border: 2px solid #1e293b;
+    }
+    
+    .organizations-table thead th {
+        background: #1e293b;
+        color: white;
+    }
+    
+    .status-badge,
+    .type-badge {
+        border: 1px solid currentColor;
+    }
+} 
+
+/* إجبار جميع أقسام الجمعيات على الامتداد الكامل */
+.main-content-with-sidebar .container-fluid,
+.main-content-with-sidebar .organizations-header,
+.main-content-with-sidebar .stats-section,
+.main-content-with-sidebar .filters-section,
+.main-content-with-sidebar .organizations-section,
+.main-content-with-sidebar .organizations-card,
+.main-content-with-sidebar .organizations-content,
+.main-content-with-sidebar .table-responsive,
+.main-content-with-sidebar .organizations-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+    overflow-x: auto;
+} 
+
+/* توسيع عمود الإجراءات وجعل الأزرار واضحة */
+.organizations-table .actions-col,
+.organizations-table .actions-cell {
+    min-width: 120px !important;
+    width: 120px !important;
+    text-align: center;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons .btn {
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 1.1rem;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+/* جعل الجدول قابل للتمرير الأفقي دائماً ويظهر كل الأعمدة */
+.organizations-section .table-responsive {
+    overflow-x: auto !important;
+    min-width: 100%;
+}
+
+.organizations-table {
+    min-width: 1100px;
+    width: max-content;
+} 
+
+/* إجبار عرض كامل للجدول مع إمكانية السحب الأفقي */
+.organizations-section .table-responsive,
+.organizations-section .organizations-card,
+.organizations-section .organizations-content {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    white-space: nowrap !important;
+}
+
+.organizations-table {
+    min-width: 1200px !important;
+    width: max-content !important;
+    table-layout: auto !important;
+}
+
+/* ضبط عرض الأعمدة لضمان ظهورها بالكامل */
+.organizations-table th,
+.organizations-table td {
+    white-space: nowrap !important;
+    min-width: auto !important;
+    max-width: none !important;
+}
+
+/* عمود الجمعية - عرض كافي للاسم والبريد الإلكتروني */
+.organizations-table .organization-col {
+    min-width: 200px !important;
+    width: 200px !important;
+}
+
+/* عمود النوع - عرض كافي للبادج */
+.organizations-table .type-col {
+    min-width: 120px !important;
+    width: 120px !important;
+}
+
+/* عمود معلومات الاتصال - عرض كافي للهاتف والعنوان */
+.organizations-table .contact-col {
+    min-width: 250px !important;
+    width: 250px !important;
+}
+
+/* عمود الحالة - عرض كافي للبادج */
+.organizations-table .status-col {
+    min-width: 100px !important;
+    width: 100px !important;
+}
+
+/* عمود التاريخ - عرض كافي للتاريخ الكامل */
+.organizations-table .date-col {
+    min-width: 150px !important;
+    width: 150px !important;
+}
+
+/* عمود الإجراءات - عرض كافي للأزرار الثلاثة */
+.organizations-table .actions-col {
+    min-width: 150px !important;
+    width: 150px !important;
+    text-align: center !important;
+}
+
+/* إجبار ظهور شريط التمرير الأفقي */
+.organizations-section .table-responsive::-webkit-scrollbar {
+    height: 8px !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 4px !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-thumb {
+    background: #888 !important;
+    border-radius: 4px !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555 !important;
+}
+
+/* إضافي: ضمان ظهور كل الخلايا والأعمدة */
+.organizations-table th,
+.organizations-table td,
+.organizations-table .organization-cell,
+.organizations-table .type-cell,
+.organizations-table .contact-cell,
+.organizations-table .status-cell,
+.organizations-table .date-cell,
+.organizations-table .actions-cell {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    min-width: auto !important;
+    max-width: none !important;
+    width: auto !important;
+}
+
+/* ضمان أن الحاوية تسمح بالتمرير الأفقي */
+.organizations-section .table-responsive {
+    overflow-x: scroll !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* إجبار عرض كامل للجدول */
+.organizations-table {
+    min-width: 1400px !important;
+    width: max-content !important;
+    table-layout: auto !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+/* إجبار ظهور شريط التمرير الأفقي دائمًا */
+.organizations-section .table-responsive {
+    overflow-x: scroll !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: auto !important;
+    -ms-overflow-style: auto !important;
+}
+
+/* إجبار عرض كامل للجدول مع عرض ثابت */
+.organizations-table {
+    min-width: 1400px !important;
+    width: 1400px !important;
+    table-layout: fixed !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+/* إجبار عرض ثابت لكل الأعمدة */
+.organizations-table th,
+.organizations-table td {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-wrap: break-word !important;
+}
+
+/* عرض ثابت لكل عمود */
+.organizations-table .id-col,
+.organizations-table .id-cell {
+    width: 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+    text-align: center !important;
+}
+
+.organizations-table .organization-col,
+.organizations-table .organization-cell {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+}
+
+.organizations-table .type-col,
+.organizations-table .type-cell {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+}
+
+.organizations-table .description-col,
+.organizations-table .description-cell {
+    width: 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+}
+
+.organizations-table .contact-col,
+.organizations-table .contact-cell {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+}
+
+.organizations-table .website-col,
+.organizations-table .website-cell {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+.organizations-table .status-col,
+.organizations-table .status-cell {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+}
+
+.organizations-table .date-col,
+.organizations-table .date-cell {
+    width: 180px !important;
+    min-width: 180px !important;
+    max-width: 180px !important;
+}
+
+.organizations-table .actions-col,
+.organizations-table .actions-cell {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+/* تحسين عرض الجدول ليشمل الأعمدة الجديدة */
+.organizations-table {
+    width: 2200px !important;
+    min-width: 2200px !important;
+    max-width: none !important;
+    table-layout: fixed !important;
+}
+
+/* تنسيق الأعمدة الجديدة */
+.organizations-table .id-cell {
+    font-weight: bold;
+    color: #6c757d;
+    background-color: #f8f9fa;
+}
+
+.organizations-table .description-text {
+    margin: 0;
+    line-height: 1.4;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.organizations-table .website-link {
+    color: #007bff;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.organizations-table .website-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* ===== ORGANIZATION DETAILS MODAL ===== */
+.organization-avatar-large {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.organization-header {
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 1rem;
+}
+
+.organization-header h4 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.organization-header .badge {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+}
+
+#organization-details-content h6 {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 0.25rem;
+}
+
+#organization-details-content p {
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+#organization-details-content .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+#organization-details-content .card-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 12px 12px 0 0 !important;
+    font-weight: 600;
+}
+
+#organization-details-content .card-body {
+    padding: 1.5rem;
+}
+
+#organization-details-content .card-body div {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+#organization-details-content .card-body div:last-child {
+    border-bottom: none;
+}
+
+#organization-details-content strong {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* تحسين الروابط في التفاصيل */
+#organization-details-content a {
+    color: #007bff;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+#organization-details-content a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* تحسين البادجات */
+#organization-details-content .badge {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+}
+
+/* تحسين المسافات */
+#organization-details-content .row > div {
+    margin-bottom: 1rem;
+}
+
+#organization-details-content .mb-3:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* إجبار ظهور شريط التمرير حتى لو لم يكن مطلوبًا */
+.organizations-section .table-responsive {
+    overflow-x: scroll !important;
+    scrollbar-width: thin !important;
+    -ms-overflow-style: scrollbar !important;
+}
+
+/* تخصيص شكل شريط التمرير */
+.organizations-section .table-responsive::-webkit-scrollbar {
+    height: 12px !important;
+    width: 12px !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 6px !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-thumb {
+    background: #888 !important;
+    border-radius: 6px !important;
+    border: 2px solid #f1f1f1 !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555 !important;
+}
+
+/* إجبار عرض كامل للحاوية */
+.organizations-section .organizations-card,
+.organizations-section .organizations-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* إجبار عرض الجدول أكبر من الحاوية لضمان ظهور شريط التمرير */
+.organizations-table {
+    width: calc(100% - 20px) !important;
+    max-width: calc(100% - 20px) !important;
+}
+
+.organizations-table {
+    width: 1500px !important;
+    min-width: 1500px !important;
+    max-width: none !important;
+}
+
+/* إجبار ظهور شريط التمرير دائمًا */
+.organizations-section .table-responsive {
+    overflow-x: scroll !important;
+    overflow-y: visible !important;
+    scrollbar-width: auto !important;
+    -ms-overflow-style: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* إجبار عرض كامل للجدول */
+.organizations-table {
+    min-width: 1400px !important;
+    width: max-content !important;
+    table-layout: auto !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+/* إجبار ظهور شريط التمرير الأفقي دائمًا */
+.organizations-section .table-responsive {
+    overflow-x: scroll !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: auto !important;
+    -ms-overflow-style: auto !important;
+}
+
+/* إجبار عرض كامل للجدول مع عرض ثابت */
+.organizations-table {
+    min-width: 1400px !important;
+    width: 1400px !important;
+    table-layout: fixed !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+/* إجبار عرض ثابت لكل الأعمدة */
+.organizations-table th,
+.organizations-table td {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    word-wrap: break-word !important;
+}
+
+/* عرض ثابت لكل عمود */
+.organizations-table .organization-col,
+.organizations-table .organization-cell {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+}
+
+.organizations-table .type-col,
+.organizations-table .type-cell {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+}
+
+.organizations-table .description-col,
+.organizations-table .description-cell {
+    width: 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+}
+
+.organizations-table .contact-col,
+.organizations-table .contact-cell {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+}
+
+.organizations-table .website-col,
+.organizations-table .website-cell {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+.organizations-table .status-col,
+.organizations-table .status-cell {
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+}
+
+.organizations-table .date-col,
+.organizations-table .date-cell {
+    width: 180px !important;
+    min-width: 180px !important;
+    max-width: 180px !important;
+}
+
+.organizations-table .actions-col,
+.organizations-table .actions-cell {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+/* إجبار ظهور شريط التمرير حتى لو لم يكن مطلوبًا */
+.organizations-section .table-responsive {
+    overflow-x: scroll !important;
+    scrollbar-width: thin !important;
+    -ms-overflow-style: scrollbar !important;
+}
+
+/* تخصيص شكل شريط التمرير */
+.organizations-section .table-responsive::-webkit-scrollbar {
+    height: 12px !important;
+    width: 12px !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 6px !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-thumb {
+    background: #888 !important;
+    border-radius: 6px !important;
+    border: 2px solid #f1f1f1 !important;
+}
+
+.organizations-section .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #555 !important;
+}
+
+/* إجبار عرض كامل للحاوية */
+.organizations-section .organizations-card,
+.organizations-section .organizations-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* ضمان عدم ضغط أي محتوى في الجدول */
+.organizations-table * {
+    box-sizing: border-box !important;
+}
+
+.organizations-table td,
+.organizations-table th {
+    padding: 12px 16px !important;
+    vertical-align: middle !important;
+    border: 1px solid #e9ecef !important;
+}
+
+/* إجبار عرض كامل للنص في الخلايا */
+.organizations-table td *,
+.organizations-table th * {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+} 
+
+/* إجبار ظهور شريط التمرير دائمًا */
+.organizations-section .table-responsive {
+    overflow-x: scroll !important;
+    overflow-y: visible !important;
+    scrollbar-width: auto !important;
+    -ms-overflow-style: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* إجبار عرض الجدول أكبر من الشاشة لضمان ظهور شريط التمرير */
+.organizations-table {
+    width: 2000px !important;
+    min-width: 2000px !important;
+    max-width: none !important;
+    table-layout: fixed !important;
+}
+
+/* إجبار عرض ثابت للأعمدة */
+.organizations-table th,
+.organizations-table td {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* عرض ثابت لكل عمود */
+.organizations-table .organization-col,
+.organizations-table .organization-cell {
+    width: 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+}
+
+.organizations-table .type-col,
+.organizations-table .type-cell {
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
+}
+
+.organizations-table .contact-col,
+.organizations-table .contact-cell {
+    width: 400px !important;
+    min-width: 400px !important;
+    max-width: 400px !important;
+}
+
+.organizations-table .status-col,
+.organizations-table .status-cell {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+}
+
+.organizations-table .date-col,
+.organizations-table .date-cell {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+}
+
+.organizations-table .actions-col,
+.organizations-table .actions-cell {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+} 

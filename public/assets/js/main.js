@@ -98,68 +98,120 @@ function initSidebar() {
     const toggleBtn = document.createElement('button');
     toggleBtn.className = 'btn btn-primary sidebar-mobile-toggle d-lg-none position-fixed';
     toggleBtn.innerHTML = '<i class="fas fa-bars"></i>';
-    toggleBtn.style.bottom = '20px';
-    toggleBtn.style.right = '20px';
-    toggleBtn.style.zIndex = '1050';
-    toggleBtn.style.borderRadius = '50%';
-    toggleBtn.style.width = '50px';
-    toggleBtn.style.height = '50px';
-    toggleBtn.style.padding = '0';
-    toggleBtn.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
-    toggleBtn.setAttribute('aria-label', 'Toggle Sidebar');
+    toggleBtn.style.cssText = 'top: 20px; right: 20px; z-index: 1001; border-radius: 50%; width: 50px; height: 50px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
     
+    // Add mobile toggle button
     document.body.appendChild(toggleBtn);
     
-    // Toggle sidebar on button click
-    toggleBtn.addEventListener('click', function() {
-        const sidebar = document.querySelector('.sidebar-fixed');
-        if (sidebar) {
+    // Get sidebar elements
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const mainContent = document.querySelector('.main-content-with-sidebar');
+    
+    if (!sidebar || !sidebarToggle) return;
+    
+    // Load sidebar state from localStorage
+    const sidebarCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    
+    // Apply initial state
+    if (sidebarCollapsed) {
+        sidebar.classList.add('collapsed');
+        if (mainContent) {
+            mainContent.classList.add('sidebar-collapsed');
+        }
+    }
+    
+    // Toggle sidebar function
+    function toggleSidebar() {
+        const isCollapsed = sidebar.classList.contains('collapsed');
+        
+        if (isCollapsed) {
+            // Expand sidebar
+            sidebar.classList.remove('collapsed');
+            if (mainContent) {
+                mainContent.classList.remove('sidebar-collapsed');
+            }
+            localStorage.setItem('sidebarCollapsed', 'false');
+        } else {
+            // Collapse sidebar
+            sidebar.classList.add('collapsed');
+            if (mainContent) {
+                mainContent.classList.add('sidebar-collapsed');
+            }
+            localStorage.setItem('sidebarCollapsed', 'true');
+        }
+    }
+    
+    // Add click event to sidebar toggle button
+    sidebarToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleSidebar();
+    });
+    
+    // Mobile sidebar functionality
+    function toggleMobileSidebar() {
+        if (window.innerWidth < 992) {
             sidebar.classList.toggle('show');
-            
-            // Update button icon
-            const icon = toggleBtn.querySelector('i');
-            if (sidebar.classList.contains('show')) {
-                icon.className = 'fas fa-times';
-            } else {
-                icon.className = 'fas fa-bars';
-            }
         }
-    });
+    }
     
-    // Close sidebar when clicking outside
+    // Add click event to mobile toggle button
+    toggleBtn.addEventListener('click', toggleMobileSidebar);
+    
+    // Close mobile sidebar when clicking outside
     document.addEventListener('click', function(event) {
-        const sidebar = document.querySelector('.sidebar-fixed');
-        if (sidebar && sidebar.classList.contains('show') && 
+        if (window.innerWidth < 992 && 
             !sidebar.contains(event.target) && 
-            event.target !== toggleBtn && 
-            !toggleBtn.contains(event.target)) {
+            !toggleBtn.contains(event.target) &&
+            sidebar.classList.contains('show')) {
             sidebar.classList.remove('show');
-            const icon = toggleBtn.querySelector('i');
-            icon.className = 'fas fa-bars';
         }
     });
     
-    // Close sidebar on escape key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            const sidebar = document.querySelector('.sidebar-fixed');
-            if (sidebar && sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show');
-                const icon = toggleBtn.querySelector('i');
-                icon.className = 'fas fa-bars';
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 992) {
+            sidebar.classList.remove('show');
+            toggleBtn.style.display = 'none';
+        } else {
+            toggleBtn.style.display = 'block';
+        }
+    });
+    
+    // Initial mobile button visibility
+    if (window.innerWidth < 992) {
+        toggleBtn.style.display = 'block';
+    } else {
+        toggleBtn.style.display = 'none';
+    }
+    
+    // Floating toggle button functionality
+    const floatingToggle = document.getElementById('sidebar-toggle-expanded');
+    if (floatingToggle) {
+        // Show floating button when sidebar is collapsed
+        function updateFloatingButton() {
+            if (sidebar.classList.contains('collapsed') && window.innerWidth >= 992) {
+                floatingToggle.classList.add('show');
+            } else {
+                floatingToggle.classList.remove('show');
             }
         }
-    });
-    
-    // Add active class to current sidebar item
-    const currentPath = window.location.pathname;
-    const sidebarLinks = document.querySelectorAll('.sidebar-fixed a');
-    
-    sidebarLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active-link');
-        }
-    });
+        
+        // Update floating button visibility
+        updateFloatingButton();
+        
+        // Add click event to floating toggle
+        floatingToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleSidebar();
+            updateFloatingButton();
+        });
+        
+        // Update floating button on window resize
+        window.addEventListener('resize', updateFloatingButton);
+    }
 }
 
 /**

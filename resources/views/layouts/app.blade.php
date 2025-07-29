@@ -16,6 +16,8 @@
     <link href="{{ asset('assets/css/fixed.css') }}" rel="stylesheet">
     <!-- Color Improvements -->
     <link href="{{ asset('assets/css/color-improvements.css') }}" rel="stylesheet">
+    <!-- Admin CSS -->
+    <link href="{{ asset('assets/css/admin.css') }}" rel="stylesheet">
     
     <!-- Preload critical fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -46,6 +48,11 @@
             <p class="text-muted">جاري التحميل...</p>
         </div>
     </div>
+
+    <!-- Floating sidebar toggle button -->
+    <button class="btn btn-primary sidebar-toggle-expanded" id="sidebar-toggle-expanded" title="إظهار الشريط الجانبي">
+        <i class="fas fa-bars"></i>
+    </button>
 
     <!-- Navbar Component -->
     @include('components.navbar')
